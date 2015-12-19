@@ -45,17 +45,17 @@ public class MenuController extends BaseController {
     @RequestMapping(value = "/menu/create", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String create(HttpServletRequest request, HttpServletResponse response,
-                         @RequestParam(value = "menuStr", required = false, defaultValue = "0") String menuStr
+                         @RequestParam(value = "data", required = false, defaultValue = "0") String data
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         // 调用接口获取access_token
         String at = KeystoneUtil.getAccessToken();
 
-        if ("0".equals(menuStr)) {
-            menuStr = ConfigUtil.getJson("menu.json");
+        if ("0".equals(data)) {
+            data = ConfigUtil.getJson("menu.json");
         }
 
         // 调用接口创建菜单
-        JSONObject resp = JSONObject.fromObject(menuService.create(at, JSONObject.fromObject(menuStr)));
+        JSONObject resp = JSONObject.fromObject(menuService.create(at, JSONObject.fromObject(data)));
         return resp.toString();
     }
 

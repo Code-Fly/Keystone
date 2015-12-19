@@ -21,7 +21,7 @@ param: "pid", required = true<br/>
 ##### create
 http://www.mydomain.com/api/keystone/menu/create<br/>
 method: POST<br/>
-param: "menuStr", required = false<br/>
+param: "data", required = false<br/>
 ##### get
 http://www.mydomain.com/api/keystone/menu/get<br/>
 method: GET<br/>
