@@ -4,6 +4,8 @@ import com.fujitsu.base.constants.Const;
 import com.fujitsu.base.service.BaseService;
 import com.fujitsu.queue.service.iface.IQueueService;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.command.ActiveMQQueue;
+import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.stereotype.Service;
 
 import javax.jms.*;
@@ -126,15 +128,15 @@ public class QueueService extends BaseService implements IQueueService {
         Destination dest;
         MessageProducer producer;
 
-        session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
+        session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
 
         if (destination.startsWith(Const.Queue.ACTIVEMQ_PROTOCAL_TOPIC)) {
-            dest = session.createTopic(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_TOPIC, ""));
+            dest = new ActiveMQTopic(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_TOPIC, ""));
         } else {
-            dest = session.createQueue(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_QUEUE, ""));
+            dest = new ActiveMQQueue(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_QUEUE, ""));
         }
-
         producer = session.createProducer(dest);
+
         producer.setDeliveryMode(DeliveryMode.PERSISTENT);
         producer.setTimeToLive(Long.parseLong(Const.Queue.ACTIVEMQ_MSG_TIMETOLIVE));
 
@@ -146,12 +148,12 @@ public class QueueService extends BaseService implements IQueueService {
         Destination dest;
         MessageConsumer consumer;
 
-        session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
+        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         if (destination.startsWith(Const.Queue.ACTIVEMQ_PROTOCAL_TOPIC)) {
-            dest = session.createTopic(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_TOPIC, ""));
+            dest = new ActiveMQTopic(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_TOPIC, ""));
         } else {
-            dest = session.createQueue(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_QUEUE, ""));
+            dest = new ActiveMQQueue(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_QUEUE, ""));
         }
 
         if (null != filter) {
@@ -166,10 +168,10 @@ public class QueueService extends BaseService implements IQueueService {
     private QueueBrowser getQueueBrowser(String destination) throws JMSException {
         Queue queue = null;
 
-        session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
+        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         if (destination.startsWith(Const.Queue.ACTIVEMQ_PROTOCAL_QUEUE)) {
-            queue = session.createQueue(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_QUEUE, ""));
+            queue = new ActiveMQQueue(destination.replace(Const.Queue.ACTIVEMQ_PROTOCAL_QUEUE, ""));
         } else {
             throw new JMSException("can not browse non-queue messages");
         }
