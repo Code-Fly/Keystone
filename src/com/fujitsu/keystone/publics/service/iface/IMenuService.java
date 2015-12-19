@@ -11,9 +11,15 @@ import net.sf.json.JSONObject;
  * @author Barrie
  */
 public interface IMenuService {
-    JSONObject create(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException;
+    JSONObject createDefault(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException;
+
+    JSONObject createCondition(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException;
 
     JSONObject get(String accessToken) throws ConnectionFailedException, WeChatException;
 
-    JSONObject delete(String accessToken) throws ConnectionFailedException, WeChatException;
+    JSONObject deleteDefault(String accessToken) throws ConnectionFailedException, WeChatException;
+
+    JSONObject deleteCondition(String accessToken, String id) throws ConnectionFailedException, WeChatException;
+
+    JSONObject test(String accessToken, String userId) throws ConnectionFailedException, WeChatException;
 }

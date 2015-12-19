@@ -18,16 +18,28 @@ param: "url", required = true<br/>
 param: "pid", required = true<br/>
 
 ###	Menu API
-##### create
-http://www.mydomain.com/api/keystone/menu/create<br/>
+##### Create default menu
+http://www.mydomain.com/api/keystone/menu/create/default<br/>
 method: POST<br/>
 param: "data", required = false<br/>
-##### get
+##### Create conditional menu
+http://www.mydomain.com/api/keystone/menu/create/condition<br/>
+method: POST<br/>
+param: "data", required = false<br/>
+##### Get menu
 http://www.mydomain.com/api/keystone/menu/get<br/>
 method: GET<br/>
-##### delete
+##### Delete default menu
 http://www.mydomain.com/api/keystone/menu/delete<br/>
 method: GET<br/>
+##### Delete condition menu
+http://www.mydomain.com/api/keystone/menu/delete<br/>
+method: POST<br/>
+param: "id", required = true<br/>
+##### Test menu
+http://www.mydomain.com/api/keystone/menu/test<br/>
+method: POST<br/>
+param: "userId", required = true<br/>
 
 ###	User API
 ##### Get SNS user

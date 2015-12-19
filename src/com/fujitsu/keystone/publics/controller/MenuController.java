@@ -33,7 +33,7 @@ public class MenuController extends BaseController {
     ICoreService coreService;
 
     /**
-     * 创建菜单
+     * 创建默认菜单
      *
      * @param request  request
      * @param response response
@@ -42,20 +42,44 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/create", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/menu/create/default", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String create(HttpServletRequest request, HttpServletResponse response,
-                         @RequestParam(value = "data", required = false, defaultValue = "0") String data
+    public String createDetault(HttpServletRequest request, HttpServletResponse response,
+                                @RequestParam(value = "data", required = false, defaultValue = "0") String data
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        // 调用接口获取access_token
         String at = KeystoneUtil.getAccessToken();
 
         if ("0".equals(data)) {
             data = ConfigUtil.getJson("menu.json");
         }
 
-        // 调用接口创建菜单
-        JSONObject resp = JSONObject.fromObject(menuService.create(at, JSONObject.fromObject(data)));
+        JSONObject resp = JSONObject.fromObject(menuService.createDefault(at, JSONObject.fromObject(data)));
+        return resp.toString();
+    }
+
+    /**
+     * 创建条件菜单
+     *
+     * @param request
+     * @param response
+     * @param data
+     * @return
+     * @throws ConnectionFailedException
+     * @throws AccessTokenException
+     * @throws WeChatException
+     */
+    @RequestMapping(value = "/menu/create/condition", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String createCondition(HttpServletRequest request, HttpServletResponse response,
+                                  @RequestParam(value = "data", required = false, defaultValue = "0") String data
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
+        String at = KeystoneUtil.getAccessToken();
+
+        if ("0".equals(data)) {
+            data = ConfigUtil.getJson("menu.json");
+        }
+
+        JSONObject resp = JSONObject.fromObject(menuService.createCondition(at, JSONObject.fromObject(data)));
         return resp.toString();
     }
 
@@ -72,16 +96,14 @@ public class MenuController extends BaseController {
     @RequestMapping(value = "/menu/get", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String get(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        // 调用接口获取access_token
         String at = KeystoneUtil.getAccessToken();
 
-        // 调用接口创建菜单
         JSONObject resp = JSONObject.fromObject(menuService.get(at));
         return resp.toString();
     }
 
     /**
-     * 删除菜单
+     * 删除默认菜单
      *
      * @param request  request
      * @param response response
@@ -90,14 +112,55 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/delete", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/menu/delete/default", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String delete(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        // 调用接口获取access_token
+    public String deleteDetault(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
-        // 调用接口创建菜单
-        JSONObject resp = JSONObject.fromObject(menuService.delete(at));
+        JSONObject resp = JSONObject.fromObject(menuService.deleteDefault(at));
+        return resp.toString();
+    }
+
+    /**
+     * 删除条件菜单
+     *
+     * @param request  request
+     * @param response response
+     * @return
+     * @throws ConnectionFailedException
+     * @throws AccessTokenException
+     * @throws WeChatException
+     */
+    @RequestMapping(value = "/menu/delete/condition", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String deleteCondition(HttpServletRequest request, HttpServletResponse response,
+                                  @RequestParam(value = "id", required = true) String id
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
+        String at = KeystoneUtil.getAccessToken();
+
+        JSONObject resp = JSONObject.fromObject(menuService.deleteCondition(at, id));
+        return resp.toString();
+    }
+
+    /**
+     * 测试菜单
+     *
+     * @param request
+     * @param response
+     * @param userId
+     * @return
+     * @throws ConnectionFailedException
+     * @throws AccessTokenException
+     * @throws WeChatException
+     */
+    @RequestMapping(value = "/menu/test", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String test(HttpServletRequest request, HttpServletResponse response,
+                       @RequestParam(value = "userId", required = true) String userId
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
+        String at = KeystoneUtil.getAccessToken();
+
+        JSONObject resp = JSONObject.fromObject(menuService.test(at, userId));
         return resp.toString();
     }
 }

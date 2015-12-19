@@ -93,11 +93,17 @@ public class Const {
 
         public static final String URL_GET_ACCESS_TOKEN = ConfigUtil.getProperty(PUBLICS_CONF, "url.access.token");
 
-        public static final String URL_MENU_CREATE = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.create");
+        public static final String URL_MENU_CREATE_DEFAULT = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.create.default");
+
+        public static final String URL_MENU_CREATE_CONDITION = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.create.condition");
 
         public static final String URL_MENU_GET = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.get");
 
-        public static final String URL_MENU_DELETE = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.delete");
+        public static final String URL_MENU_DELETE_DEFAULT = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.delete.default");
+
+        public static final String URL_MENU_DELETE_CONDITION = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.delete.condition");
+
+        public static final String URL_MENU_TEST = ConfigUtil.getProperty(PUBLICS_CONF, "url.menu.test");
 
         public static final String URL_SNS_OAUTH2_REDIRECT = ConfigUtil.getProperty(PUBLICS_CONF, "url.sns.oauth2.redirect");
 

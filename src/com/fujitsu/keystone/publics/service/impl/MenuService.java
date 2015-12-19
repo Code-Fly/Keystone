@@ -40,27 +40,26 @@ public class MenuService extends BaseService implements IMenuService {
     @Resource
     IMessageService messageService;
 
-    /**
-     * @param accessToken
-     * @param json
-     * @return
-     * @throws ConnectionFailedException
-     */
-    public JSONObject create(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException {
 
-        // 拼装创建菜单的url
-        String url = Const.PublicPlatform.URL_MENU_CREATE.replace("ACCESS_TOKEN", accessToken);
+    @Override
+    public JSONObject createDefault(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException {
+        String url = Const.PublicPlatform.URL_MENU_CREATE_DEFAULT.replace("ACCESS_TOKEN", accessToken);
 
         String response = WeChatClientUtil.post(url, json.toString(), CharEncoding.UTF_8);
 
         return JSONObject.fromObject(response);
     }
 
-    /**
-     * @param accessToken
-     * @return
-     * @throws ConnectionFailedException
-     */
+    @Override
+    public JSONObject createCondition(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException {
+        String url = Const.PublicPlatform.URL_MENU_CREATE_CONDITION.replace("ACCESS_TOKEN", accessToken);
+
+        String response = WeChatClientUtil.post(url, json.toString(), CharEncoding.UTF_8);
+
+        return JSONObject.fromObject(response);
+    }
+
+    @Override
     public JSONObject get(String accessToken) throws ConnectionFailedException, WeChatException {
         String url = Const.PublicPlatform.URL_MENU_GET.replace("ACCESS_TOKEN", accessToken);
 
@@ -69,18 +68,36 @@ public class MenuService extends BaseService implements IMenuService {
         return JSONObject.fromObject(response);
     }
 
-    /**
-     * @param accessToken
-     * @return
-     * @throws ConnectionFailedException
-     */
-    public JSONObject delete(String accessToken) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_MENU_DELETE.replace("ACCESS_TOKEN", accessToken);
+    @Override
+    public JSONObject deleteDefault(String accessToken) throws ConnectionFailedException, WeChatException {
+        String url = Const.PublicPlatform.URL_MENU_DELETE_CONDITION.replace("ACCESS_TOKEN", accessToken);
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
         return JSONObject.fromObject(response);
     }
 
+    @Override
+    public JSONObject deleteCondition(String accessToken, String id) throws ConnectionFailedException, WeChatException {
+        String url = Const.PublicPlatform.URL_MENU_DELETE_DEFAULT.replace("ACCESS_TOKEN", accessToken);
 
+        JSONObject param = new JSONObject();
+        param.put("menuid", id);
+
+        String response = WeChatClientUtil.post(url, param.toString(), CharEncoding.UTF_8);
+
+        return JSONObject.fromObject(response);
+    }
+
+    @Override
+    public JSONObject test(String accessToken, String userId) throws ConnectionFailedException, WeChatException {
+        String url = Const.PublicPlatform.URL_MENU_TEST.replace("ACCESS_TOKEN", accessToken);
+
+        JSONObject param = new JSONObject();
+        param.put("user_id", userId);
+
+        String response = WeChatClientUtil.post(url, param.toString(), CharEncoding.UTF_8);
+
+        return JSONObject.fromObject(response);
+    }
 }
