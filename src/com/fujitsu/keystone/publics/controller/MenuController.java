@@ -50,7 +50,7 @@ public class MenuController extends BaseController {
         String at = KeystoneUtil.getAccessToken();
 
         if ("0".equals(data)) {
-            data = ConfigUtil.getJson("menu.json");
+            data = ConfigUtil.getJson("menu-default.json");
         }
 
         JSONObject resp = JSONObject.fromObject(menuService.createDefault(at, JSONObject.fromObject(data)));
@@ -76,7 +76,7 @@ public class MenuController extends BaseController {
         String at = KeystoneUtil.getAccessToken();
 
         if ("0".equals(data)) {
-            data = ConfigUtil.getJson("menu.json");
+            data = ConfigUtil.getJson("menu-condition.json");
         }
 
         JSONObject resp = JSONObject.fromObject(menuService.createCondition(at, JSONObject.fromObject(data)));
