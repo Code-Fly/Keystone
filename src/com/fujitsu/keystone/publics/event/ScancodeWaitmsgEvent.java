@@ -43,7 +43,7 @@ public class ScancodeWaitmsgEvent extends Event {
         message.setCreateTime(new Date().getTime());
         message.setMsgType(MessageService.RESP_MESSAGE_TYPE_TEXT);
 
-        message.setContent("message");
+        message.setContent("{eventKey:\"" + eventKey + "\" , scanResult: \"" + scanResult + "\"}");
         // 将消息对象转换成xml
         respXml = MessageService.messageToXml(message);
 

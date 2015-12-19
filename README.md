@@ -1,5 +1,5 @@
-# GasSafeCloud
-GasSafeCloud
+# WeChat Keystone
+Keystone API reference
 
 
 ###	Server API
@@ -20,10 +20,14 @@ param: "pid", required = true<br/>
 ###	Menu API
 ##### create
 http://www.mydomain.com/api/keystone/menu/create<br/>
+method: POST<br/>
+param: "menuStr", required = false<br/>
 ##### get
 http://www.mydomain.com/api/keystone/menu/get<br/>
+method: GET<br/>
 ##### delete
 http://www.mydomain.com/api/keystone/menu/delete<br/>
+method: GET<br/>
 
 ###	User API
 ##### Get SNS user
@@ -129,6 +133,15 @@ method: GET<br/>
 http://www.mydomain.com/api/keystone/customerservice/account/online<br/>
 method: GET<br/>
 
+###	Queue API
+##### Browse queue
+http://www.mydomain.com/api/keystone/queue/browse/{prefix}/{queue}<br/>
+method: GET<br/>
+param: "filter", required = false<br/>
+##### Clear queue
+http://www.mydomain.com/api/keystone/queue/clear/{prefix}/{queue}<br/>
+method: GET<br/>
+param: "filter", required = false<br/>
 
 
 

@@ -14,6 +14,7 @@ import com.fujitsu.keystone.publics.service.iface.IMenuService;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -43,11 +44,15 @@ public class MenuController extends BaseController {
      */
     @RequestMapping(value = "/menu/create", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String create(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
+    public String create(HttpServletRequest request, HttpServletResponse response,
+                         @RequestParam(value = "menuStr", required = false, defaultValue = "0") String menuStr
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         // 调用接口获取access_token
         String at = KeystoneUtil.getAccessToken();
 
-        String menuStr = ConfigUtil.getJson("menu.json");
+        if ("0".equals(menuStr)) {
+            menuStr = ConfigUtil.getJson("menu.json");
+        }
 
         // 调用接口创建菜单
         JSONObject resp = JSONObject.fromObject(menuService.create(at, JSONObject.fromObject(menuStr)));
