@@ -121,6 +121,14 @@ public class Const {
 
         public static final String URL_USER_GROUP_GET_BY_OPENID = ConfigUtil.getProperty(PUBLICS_CONF, "url.user.group.get.by.openid");
 
+        public static final String URL_USER_GROUP_RENAME = ConfigUtil.getProperty(PUBLICS_CONF, "url.user.group.rename");
+
+        public static final String URL_USER_GROUP_UPDATE = ConfigUtil.getProperty(PUBLICS_CONF, "url.user.group.update");
+
+        public static final String URL_USER_GROUP_BATCH_UPDATE = ConfigUtil.getProperty(PUBLICS_CONF, "url.user.group.batchupdate");
+
+        public static final String URL_USER_GROUP_DELETE = ConfigUtil.getProperty(PUBLICS_CONF, "url.user.group.delete");
+
         public static final String URL_MATERIAL_GET_LIST = ConfigUtil.getProperty(PUBLICS_CONF, "url.material.get.list");
 
         public static final String URL_MATERIAL_GET_DETAIL = ConfigUtil.getProperty(PUBLICS_CONF, "url.material.get.detail");

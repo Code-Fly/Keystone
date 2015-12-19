@@ -5,6 +5,7 @@ package com.fujitsu.keystone.publics.service.iface;
 
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,4 +29,12 @@ public interface IUserService {
     JSONObject getWeChatUserGroupList(String accessToken) throws ConnectionFailedException, WeChatException;
 
     JSONObject getWeChatUserGroupByOpenId(String accessToken, String openId) throws ConnectionFailedException, WeChatException;
+
+    JSONObject renameWeChatUserGroup(String accessToken, String groupId, String name) throws ConnectionFailedException, WeChatException;
+
+    JSONObject updateWeChatUserGroup(String accessToken, String openId, String toGroupId) throws ConnectionFailedException, WeChatException;
+
+    JSONObject batchUpdateWeChatUserGroup(String accessToken, JSONArray openIds, String toGroupId) throws ConnectionFailedException, WeChatException;
+
+    JSONObject deleteWeChatUserGroup(String accessToken, String groupId) throws ConnectionFailedException, WeChatException;
 }

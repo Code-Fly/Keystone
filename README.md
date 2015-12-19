@@ -60,6 +60,21 @@ method: GET<br/>
 ##### Get WeChat user group by openid
 http://www.mydomain.com/api/keystone/user/group/query/{openId}<br/>
 method: GET<br/>
+##### Rename WeChat user group
+http://www.mydomain.com/api/keystone/user/group/rename/{groupId}/{name}<br/>
+method: GET<br/>
+##### Move WeChat user to group
+http://www.mydomain.com/api/keystone/user/group/update/{openId}/{toGroupId}<br/>
+method: GET<br/>
+##### Bantch move WeChat user to group
+http://www.mydomain.com/api/keystone/user/group/batchUpdate<br/>
+method: POST<br/>
+param: "openIds", required = true<br/>
+param: "toGroupId", required = true<br/>
+##### Delete WeChat user group
+http://www.mydomain.com/api/keystone/user/group/delete/{groupId}<br/>
+method: GET<br/>
+
 
 ###	Material API
 ##### Get material
