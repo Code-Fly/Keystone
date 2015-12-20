@@ -52,7 +52,7 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject getAccountAdd(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
+    public JSONObject accountAdd(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
         String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_ADD.replace("ACCESS_TOKEN", accessToken);
 
         String response = WeChatClientUtil.post(url, JSONObject.fromObject(account).toString(), CharEncoding.UTF_8);
@@ -61,7 +61,7 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject getAccountDelete(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
+    public JSONObject accountDelete(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
         String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_DELETE.replace("ACCESS_TOKEN", accessToken).replace("KFACCOUNT", account.getKf_account());
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
@@ -70,7 +70,7 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject getAccountUpdate(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
+    public JSONObject accountUpdate(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
         String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_UPDATE.replace("ACCESS_TOKEN", accessToken);
 
         String response = WeChatClientUtil.post(url, JSONObject.fromObject(account).toString(), CharEncoding.UTF_8);

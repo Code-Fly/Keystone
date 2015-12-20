@@ -74,7 +74,39 @@ public class CustomerServiceController extends BaseController {
 
     @RequestMapping(value = "/customerservice/account/create", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String getAccountAdd(HttpServletRequest request, HttpServletResponse response,
+    public String accountAdd(HttpServletRequest request, HttpServletResponse response,
+                             @RequestParam(value = "kf_account", required = true) String kf_account,
+                             @RequestParam(value = "nickname", required = true) String nickname,
+                             @RequestParam(value = "password", required = true) String password
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
+        String at = KeystoneUtil.getAccessToken();
+
+        KfInfo account = new KfInfo();
+        account.setKf_account(kf_account);
+        account.setNickname(nickname);
+        account.setPassword(password);
+        JSONObject resp = customerService.accountAdd(at, account);
+
+        return resp.toString();
+    }
+
+    @RequestMapping(value = "/customerservice/account/delete", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String accountDelete(HttpServletRequest request, HttpServletResponse response,
+                                @RequestParam(value = "kf_account", required = true) String kf_account
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
+        String at = KeystoneUtil.getAccessToken();
+
+        KfInfo account = new KfInfo();
+        account.setKf_account(kf_account);
+        JSONObject resp = customerService.accountDelete(at, account);
+
+        return resp.toString();
+    }
+
+    @RequestMapping(value = "/customerservice/account/update", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String accountUpdate(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam(value = "kf_account", required = true) String kf_account,
                                 @RequestParam(value = "nickname", required = true) String nickname,
                                 @RequestParam(value = "password", required = true) String password
@@ -85,39 +117,7 @@ public class CustomerServiceController extends BaseController {
         account.setKf_account(kf_account);
         account.setNickname(nickname);
         account.setPassword(password);
-        JSONObject resp = customerService.getAccountAdd(at, account);
-
-        return resp.toString();
-    }
-
-    @RequestMapping(value = "/customerservice/account/delete", produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public String getAccountDelete(HttpServletRequest request, HttpServletResponse response,
-                                   @RequestParam(value = "kf_account", required = true) String kf_account
-    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
-
-        KfInfo account = new KfInfo();
-        account.setKf_account(kf_account);
-        JSONObject resp = customerService.getAccountDelete(at, account);
-
-        return resp.toString();
-    }
-
-    @RequestMapping(value = "/customerservice/account/update", produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public String getAccountUpdate(HttpServletRequest request, HttpServletResponse response,
-                                   @RequestParam(value = "kf_account", required = true) String kf_account,
-                                   @RequestParam(value = "nickname", required = true) String nickname,
-                                   @RequestParam(value = "password", required = true) String password
-    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
-
-        KfInfo account = new KfInfo();
-        account.setKf_account(kf_account);
-        account.setNickname(nickname);
-        account.setPassword(password);
-        JSONObject resp = customerService.getAccountUpdate(at, account);
+        JSONObject resp = customerService.accountUpdate(at, account);
 
         return resp.toString();
     }

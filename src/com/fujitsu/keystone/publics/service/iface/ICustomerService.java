@@ -18,11 +18,11 @@ public interface ICustomerService {
 
     JSONObject getAccountListOnline(String accessToken) throws ConnectionFailedException, WeChatException;
 
-    JSONObject getAccountAdd(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException;
+    JSONObject accountAdd(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException;
 
-    JSONObject getAccountDelete(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException;
+    JSONObject accountDelete(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException;
 
-    JSONObject getAccountUpdate(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException;
+    JSONObject accountUpdate(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException;
 
     JSONObject sendTextMessage(String accessToken, TextMessage message) throws ConnectionFailedException, WeChatException;
 
