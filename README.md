@@ -135,7 +135,7 @@ http://www.mydomain.com/api/keystone/merchant/pay/refund/{tradeId}<br/>
 ##### Send coupon
 http://www.mydomain.com/api/keystone/customerservice/coupon/send<br/>
 method: POST<br/>
-param: "touser", required = true<br/>
+param: "toUser", required = true<br/>
 param: "cardId", required = true<br/>
 ##### Create account
 http://www.mydomain.com/api/keystone/customerservice/account/create<br/>

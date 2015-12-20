@@ -34,13 +34,15 @@ public class CustomerServiceController extends BaseController {
 
     @RequestMapping(value = "/customerservice/coupon/send", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String send(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "touser", required = true) String touser,
-                       @RequestParam(value = "cardId", required = true) String cardId) throws ConnectionFailedException, AccessTokenException, WeChatException {
+    public String send(HttpServletRequest request, HttpServletResponse response,
+                       @RequestParam(value = "toUser", required = true) String toUser,
+                       @RequestParam(value = "cardId", required = true) String cardId
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
         CouponMessage message = new CouponMessage();
         message.setMsgtype(CustomerService.CUSTOMER_SERVICE_MESSAGE_TYPE_COUPON);
-        message.setTouser(touser);
+        message.setTouser(toUser);
         WxCard coupon = new WxCard();
         coupon.setCard_id(cardId);
         message.setWxcard(coupon);

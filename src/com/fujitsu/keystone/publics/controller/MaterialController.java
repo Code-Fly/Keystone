@@ -40,8 +40,11 @@ public class MaterialController extends BaseController {
      */
     @RequestMapping(value = "/material/list/{type}/{offset}/{count}", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String getMaterialList(HttpServletRequest request, HttpServletResponse response, @PathVariable String type, @PathVariable int offset, @PathVariable int count)
-            throws ConnectionFailedException, AccessTokenException, WeChatException {
+    public String getMaterialList(HttpServletRequest request, HttpServletResponse response,
+                                  @PathVariable String type,
+                                  @PathVariable int offset,
+                                  @PathVariable int count
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         // 调用接口获取access_token
         String at = KeystoneUtil.getAccessToken();
 
@@ -60,7 +63,9 @@ public class MaterialController extends BaseController {
      */
     @RequestMapping(value = "/material/query/{mediaId}", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String getMaterial(HttpServletRequest request, HttpServletResponse response, @PathVariable String mediaId) throws ConnectionFailedException, AccessTokenException, WeChatException {
+    public String getMaterial(HttpServletRequest request, HttpServletResponse response,
+                              @PathVariable String mediaId
+    ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         // 调用接口获取access_token
         String at = KeystoneUtil.getAccessToken();
 
