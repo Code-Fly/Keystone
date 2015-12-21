@@ -11,6 +11,7 @@ import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.iface.ICoreService;
 import com.fujitsu.keystone.publics.service.iface.IMaterialService;
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +40,7 @@ public class MaterialController extends BaseController {
      * @throws ConnectionFailedException
      * @throws AccessTokenException
      */
-    @RequestMapping(value = "/material/list/{type}/{offset}/{count}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/material/list/{type}/{offset}/{count}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getMaterialList(HttpServletRequest request, HttpServletResponse response,
                                   @PathVariable String type,
@@ -62,7 +63,7 @@ public class MaterialController extends BaseController {
      * @throws ConnectionFailedException
      * @throws AccessTokenException
      */
-    @RequestMapping(value = "/material/query/{mediaId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/material/query/{mediaId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getMaterial(HttpServletRequest request, HttpServletResponse response,
                               @PathVariable String mediaId

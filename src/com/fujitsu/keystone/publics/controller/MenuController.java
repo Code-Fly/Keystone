@@ -12,6 +12,7 @@ import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.iface.ICoreService;
 import com.fujitsu.keystone.publics.service.iface.IMenuService;
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,7 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/create/default", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/menu/create/default", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String createDetault(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam(value = "data", required = false, defaultValue = "0") String data
@@ -69,7 +70,7 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/create/condition", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/menu/create/condition", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String createCondition(HttpServletRequest request, HttpServletResponse response,
                                   @RequestParam(value = "data", required = false, defaultValue = "0") String data
@@ -94,7 +95,7 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/menu/get", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String get(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
@@ -113,7 +114,7 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/delete/default", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/menu/delete/default", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String deleteDetault(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
@@ -132,7 +133,7 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/delete/condition", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/menu/delete/condition", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String deleteCondition(HttpServletRequest request, HttpServletResponse response,
                                   @RequestParam(value = "id", required = true) String id
@@ -154,7 +155,7 @@ public class MenuController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/menu/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/menu/test", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String test(HttpServletRequest request, HttpServletResponse response,
                        @RequestParam(value = "userId", required = true) String userId

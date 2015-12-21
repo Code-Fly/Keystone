@@ -4,6 +4,7 @@ import com.fujitsu.base.constants.Const;
 import com.fujitsu.base.controller.BaseController;
 import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.merchant.service.iface.IRedpackService;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class RedpackController extends BaseController {
     @Resource
     IRedpackService redpackService;
 
-    @RequestMapping(value = "/merchant/redpack/send/{openId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/merchant/redpack/send/{openId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String sendRedpack(HttpServletRequest request, HttpServletResponse response, @PathVariable String openId) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();

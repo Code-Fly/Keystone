@@ -14,6 +14,7 @@ import com.fujitsu.keystone.publics.entity.customer.message.WxCard;
 import com.fujitsu.keystone.publics.service.iface.ICustomerService;
 import com.fujitsu.keystone.publics.service.impl.CustomerService;
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class CustomerServiceController extends BaseController {
     @Resource
     ICustomerService customerService;
 
-    @RequestMapping(value = "/customerservice/coupon/send", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customerservice/coupon/send", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String send(HttpServletRequest request, HttpServletResponse response,
                        @RequestParam(value = "toUser", required = true) String toUser,
@@ -53,7 +54,7 @@ public class CustomerServiceController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/customerservice/account/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customerservice/account/list", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getAccountList(HttpServletRequest request, HttpServletResponse response
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
@@ -64,7 +65,7 @@ public class CustomerServiceController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/customerservice/account/online", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customerservice/account/online", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getAccountListOnline(HttpServletRequest request, HttpServletResponse response
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
@@ -75,7 +76,7 @@ public class CustomerServiceController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/customerservice/account/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customerservice/account/create", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String accountAdd(HttpServletRequest request, HttpServletResponse response,
                              @RequestParam(value = "kf_account", required = true) String kf_account,
@@ -93,7 +94,7 @@ public class CustomerServiceController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/customerservice/account/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customerservice/account/delete", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String accountDelete(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam(value = "kf_account", required = true) String kf_account
@@ -107,7 +108,7 @@ public class CustomerServiceController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/customerservice/account/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/customerservice/account/update", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String accountUpdate(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam(value = "kf_account", required = true) String kf_account,

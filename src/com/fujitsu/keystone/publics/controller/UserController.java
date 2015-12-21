@@ -14,6 +14,7 @@ import com.fujitsu.keystone.publics.service.iface.ICoreService;
 import com.fujitsu.keystone.publics.service.iface.IUserService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +48,7 @@ public class UserController extends BaseController {
      * @throws ConnectionFailedException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/sns/query/{openId}/{accessToken}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/sns/query/{openId}/{accessToken}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getSNSUserInfo(HttpServletRequest request, HttpServletResponse response,
                                  @PathVariable String openId,
@@ -69,7 +70,7 @@ public class UserController extends BaseController {
      * @throws WeChatException
      * @throws OAuthException
      */
-    @RequestMapping(value = "/user/sns/oauth", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/sns/oauth", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String SNSUserOAuth(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException, OAuthException {
 
@@ -112,7 +113,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/query/{openId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/query/{openId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getWeChatUserInfo(HttpServletRequest request, HttpServletResponse response,
                                     @PathVariable String openId
@@ -137,7 +138,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/list", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getWeChatUserList(HttpServletRequest request, HttpServletResponse response,
                                     @RequestParam(value = "nextOpenId", required = false, defaultValue = "0") String nextOpenId
@@ -162,7 +163,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/group/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/group/list", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getWeChatUserGroupList(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
@@ -183,7 +184,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/group/query/{openId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/group/query/{openId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getWeChatUserGroupByOpenId(HttpServletRequest request, HttpServletResponse response,
                                              @PathVariable String openId
@@ -205,7 +206,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/group/rename/{groupId}/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/group/rename/{groupId}/{name}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String renameWeChatUserGroup(HttpServletRequest request, HttpServletResponse response,
                                         @PathVariable String groupId,
@@ -228,7 +229,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/group/update/{openId}/{toGroupId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/group/update/{openId}/{toGroupId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String updateWeChatUserGroup(HttpServletRequest request, HttpServletResponse response,
                                         @PathVariable String openId,
@@ -251,7 +252,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/group/batchUpdate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/group/batchUpdate", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String batchUpdateWeChatUserGroup(HttpServletRequest request, HttpServletResponse response,
                                              @RequestParam(value = "openIds", required = true) String openIds,
@@ -273,7 +274,7 @@ public class UserController extends BaseController {
      * @throws AccessTokenException
      * @throws WeChatException
      */
-    @RequestMapping(value = "/user/group/delete/{groupId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/group/delete/{groupId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String deleteWeChatUserGroup(HttpServletRequest request, HttpServletResponse response,
                                         @PathVariable String groupId

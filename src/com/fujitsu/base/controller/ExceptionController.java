@@ -2,6 +2,7 @@ package com.fujitsu.base.controller;
 
 import com.fujitsu.base.entity.ErrorMsg;
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/exception")
 public class ExceptionController extends BaseController {
 
-    @RequestMapping(value = "/401", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/401", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     @ResponseBody
     public String missingLogin() {
@@ -27,7 +28,7 @@ public class ExceptionController extends BaseController {
         return JSONObject.fromObject(errMsg).toString();
     }
 
-    @RequestMapping(value = "/403", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/403", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
     @ResponseBody
     public String forbiddenDirectoryListing() {
@@ -36,7 +37,7 @@ public class ExceptionController extends BaseController {
         return JSONObject.fromObject(errMsg).toString();
     }
 
-    @RequestMapping(value = "/404", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/404", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
     public String missingResource() {
@@ -45,7 +46,7 @@ public class ExceptionController extends BaseController {
         return JSONObject.fromObject(errMsg).toString();
     }
 
-    @RequestMapping(value = "/500", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/500", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public String uncaughtException(HttpServletRequest request) {
@@ -61,7 +62,7 @@ public class ExceptionController extends BaseController {
         return JSONObject.fromObject(errMsg).toString();
     }
 
-    @RequestMapping(value = "/503", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/503", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
     @ResponseBody
     public String unsupportedServletMethod() {

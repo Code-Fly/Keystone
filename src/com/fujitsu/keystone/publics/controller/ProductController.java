@@ -11,6 +11,7 @@ import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.impl.CoreService;
 import com.fujitsu.keystone.publics.service.impl.ProductService;
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,7 @@ public class ProductController extends BaseController {
     @Resource
     ProductService productService;
 
-    @RequestMapping(value = "/product/list/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/list/{status}", produces =  MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getProductList(HttpServletRequest request, HttpServletResponse response,
                                  @PathVariable int status,
@@ -58,7 +59,7 @@ public class ProductController extends BaseController {
         return JSONObject.fromObject(resp).toString();
     }
 
-    @RequestMapping(value = "/product/query/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/query/{productId}", produces =  MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getProduct(HttpServletRequest request, HttpServletResponse response, @PathVariable String productId) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
@@ -68,7 +69,7 @@ public class ProductController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/product/group/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/group/list", produces =  MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getProductGroupList(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
@@ -78,7 +79,7 @@ public class ProductController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/product/group/query/{groupId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/group/query/{groupId}", produces =  MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getProductGroupDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable String groupId) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();

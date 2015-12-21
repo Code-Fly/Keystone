@@ -24,6 +24,7 @@ public class WebController extends BaseController {
     public String index(HttpServletRequest request, HttpServletResponse response, HttpSession session,
                         @PathVariable String page
     ) {
-        return "/web/" + page;
+        //return "/web/" + page;
+        return "redirect:http://www.baidu.com";
     }
 }

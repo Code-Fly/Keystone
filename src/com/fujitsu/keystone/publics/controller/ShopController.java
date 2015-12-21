@@ -11,6 +11,7 @@ import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.impl.CoreService;
 import com.fujitsu.keystone.publics.service.impl.ShopService;
 import net.sf.json.JSONObject;
+import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class ShopController extends BaseController {
     @Resource
     ShopService shopService;
 
-    @RequestMapping(value = "/shop/query/{poiId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/shop/query/{poiId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getShop(HttpServletRequest request, HttpServletResponse response, @PathVariable String poiId) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
@@ -47,7 +48,7 @@ public class ShopController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/shop/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/shop/list", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getShopList(HttpServletRequest request, HttpServletResponse response,
                               @RequestParam(value = "begain", required = false, defaultValue = "0") String begin,

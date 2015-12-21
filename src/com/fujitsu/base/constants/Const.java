@@ -77,10 +77,8 @@ public class Const {
         public static final String ACTIVEMQ_QUEUE_SYSTEM_PREFIX = "SYS.";
 
         public static final String ACTIVEMQ_RECEIVE_TIMEOUT = ConfigUtil.getProperty(ACTIVEMQ_CONF, "activemq.receive.timeout");
-        ;
 
         public static final String ACTIVEMQ_MSG_TIMETOLIVE = ConfigUtil.getProperty(ACTIVEMQ_CONF, "activemq.msg.timetolive");
-        ;
 
     }
 
@@ -163,7 +161,11 @@ public class Const {
 
         public static final String URL_CUSTOMER_SERVICE_KF_UPLOAD_HEAD_IMG = ConfigUtil.getProperty(PUBLICS_CONF, "url.customer.service.kf.uploadHeadImg");
 
+        public static final String URL_MEDIA_GET = ConfigUtil.getProperty(PUBLICS_CONF, "url.media.get");
 
+        public static final String URL_MEDIA_UPLOAD = ConfigUtil.getProperty(PUBLICS_CONF, "url.media.upload");
+
+        public static final String URL_MEDIA_UPLOADIMG = ConfigUtil.getProperty(PUBLICS_CONF, "url.media.uploadimg");
     }
 
     public static class MerchantPlatform {
