@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Barrie on 15/12/21.
  */
@@ -18,8 +20,8 @@ public class ExceptionController extends BaseController {
     @RequestMapping(value = "/401", produces = "application/json;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     @ResponseBody
-    public String missingLogin(Exception ex) {
-        logger.error("Missing login", ex);
+    public String missingLogin() {
+        logger.error("Missing login");
         ErrorMsg errMsg = new ErrorMsg(HttpStatus.UNAUTHORIZED.toString(), "Missing login");
         return JSONObject.fromObject(errMsg).toString();
     }
@@ -27,8 +29,8 @@ public class ExceptionController extends BaseController {
     @RequestMapping(value = "/403", produces = "application/json;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
     @ResponseBody
-    public String forbiddenDirectoryListing(Exception ex) {
-        logger.error("Forbidden directory listing", ex);
+    public String forbiddenDirectoryListing() {
+        logger.error("Forbidden directory listing");
         ErrorMsg errMsg = new ErrorMsg(HttpStatus.FORBIDDEN.toString(), "Forbidden directory listing");
         return JSONObject.fromObject(errMsg).toString();
     }
@@ -36,8 +38,8 @@ public class ExceptionController extends BaseController {
     @RequestMapping(value = "/404", produces = "application/json;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
-    public String missingResource(Exception ex) {
-        logger.error("Missing resource", ex);
+    public String missingResource() {
+        logger.error("Missing resource");
         ErrorMsg errMsg = new ErrorMsg(HttpStatus.NOT_FOUND.toString(), "Missing resource");
         return JSONObject.fromObject(errMsg).toString();
     }
@@ -45,7 +47,12 @@ public class ExceptionController extends BaseController {
     @RequestMapping(value = "/500", produces = "application/json;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public String uncaughtException(Exception ex) {
+    public String uncaughtException(HttpServletRequest request) {
+        // retrieve some useful information from the request
+        // Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        // String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
+
+        Exception ex = (Exception) request.getAttribute("javax.servlet.error.exception");
         logger.error("Uncaught exception", ex);
         ErrorMsg errMsg = new ErrorMsg(HttpStatus.INTERNAL_SERVER_ERROR.toString(), "Uncaught exception");
         return JSONObject.fromObject(errMsg).toString();
@@ -54,9 +61,11 @@ public class ExceptionController extends BaseController {
     @RequestMapping(value = "/503", produces = "application/json;charset=UTF-8")
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
     @ResponseBody
-    public String unsupportedServletMethod(Exception ex) {
-        logger.error("Unsupported servlet method", ex);
+    public String unsupportedServletMethod() {
+        logger.error("Unsupported servlet method");
         ErrorMsg errMsg = new ErrorMsg(HttpStatus.SERVICE_UNAVAILABLE.toString(), "Unsupported servlet method");
         return JSONObject.fromObject(errMsg).toString();
     }
+
+
 }
