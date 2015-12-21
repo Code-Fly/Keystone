@@ -1,6 +1,7 @@
 package com.fujitsu.keystone.merchant.service.impl;
 
 import com.fujitsu.base.constants.Const;
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.WeChatClientUtil;
@@ -26,7 +27,7 @@ public class CouponService extends BaseService implements ICouponService {
      * @param data
      * @return
      */
-    public String sendCoupon(Map<String, Object> data) throws ConnectionFailedException, WeChatException {
+    public String sendCoupon(Map<String, Object> data) throws ConnectionFailedException, WeChatException, AccessTokenException {
         String url = Const.MerchantPlatform.URL_MERCHANT_COUPON_SEND;
 
         String response = WeChatClientUtil.post(url, XmlUtil.toXML(data), CharEncoding.UTF_8);

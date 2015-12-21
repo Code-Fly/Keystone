@@ -7,7 +7,6 @@ import com.fujitsu.base.controller.BaseController;
 import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.impl.CoreService;
 import com.fujitsu.keystone.publics.service.impl.ShopService;
 import net.sf.json.JSONObject;
@@ -37,9 +36,8 @@ public class ShopController extends BaseController {
     @RequestMapping(value = "/shop/query/{poiId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getShop(HttpServletRequest request, HttpServletResponse response, @PathVariable String poiId) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = shopService.getShop(request, at, poiId);
+        JSONObject resp = shopService.getShop(request, poiId);
         if (resp.containsKey("errcode") && !resp.getString("errcode").equals("0")) {
             logger.error(resp.toString());
             return resp.toString();
@@ -54,9 +52,8 @@ public class ShopController extends BaseController {
                               @RequestParam(value = "begain", required = false, defaultValue = "0") String begin,
                               @RequestParam(value = "limit", required = false, defaultValue = "50") String limit
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = shopService.getShopList(request, at, begin, limit);
+        JSONObject resp = shopService.getShopList(request, begin, limit);
         if (resp.containsKey("errcode") && !resp.getString("errcode").equals("0")) {
             logger.error(resp.toString());
             return resp.toString();

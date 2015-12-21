@@ -7,7 +7,6 @@ import com.fujitsu.base.controller.BaseController;
 import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.entity.customer.account.KfInfo;
 import com.fujitsu.keystone.publics.entity.customer.message.CouponMessage;
 import com.fujitsu.keystone.publics.entity.customer.message.WxCard;
@@ -40,7 +39,6 @@ public class CustomerServiceController extends BaseController {
                        @RequestParam(value = "toUser", required = true) String toUser,
                        @RequestParam(value = "cardId", required = true) String cardId
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
         CouponMessage message = new CouponMessage();
         message.setMsgtype(CustomerService.CUSTOMER_SERVICE_MESSAGE_TYPE_COUPON);
@@ -49,7 +47,7 @@ public class CustomerServiceController extends BaseController {
         coupon.setCard_id(cardId);
         message.setWxcard(coupon);
 
-        JSONObject resp = customerService.sendCouponMessage(at, message);
+        JSONObject resp = customerService.sendCouponMessage(message);
 
         return resp.toString();
     }
@@ -58,9 +56,8 @@ public class CustomerServiceController extends BaseController {
     @ResponseBody
     public String getAccountList(HttpServletRequest request, HttpServletResponse response
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = customerService.getAccountList(at);
+        JSONObject resp = customerService.getAccountList();
 
         return resp.toString();
     }
@@ -69,9 +66,8 @@ public class CustomerServiceController extends BaseController {
     @ResponseBody
     public String getAccountListOnline(HttpServletRequest request, HttpServletResponse response
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = customerService.getAccountListOnline(at);
+        JSONObject resp = customerService.getAccountListOnline();
 
         return resp.toString();
     }
@@ -83,13 +79,12 @@ public class CustomerServiceController extends BaseController {
                              @RequestParam(value = "nickname", required = true) String nickname,
                              @RequestParam(value = "password", required = true) String password
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
         KfInfo account = new KfInfo();
         account.setKf_account(kf_account);
         account.setNickname(nickname);
         account.setPassword(password);
-        JSONObject resp = customerService.accountAdd(at, account);
+        JSONObject resp = customerService.accountAdd(account);
 
         return resp.toString();
     }
@@ -99,11 +94,10 @@ public class CustomerServiceController extends BaseController {
     public String accountDelete(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam(value = "kf_account", required = true) String kf_account
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
         KfInfo account = new KfInfo();
         account.setKf_account(kf_account);
-        JSONObject resp = customerService.accountDelete(at, account);
+        JSONObject resp = customerService.accountDelete(account);
 
         return resp.toString();
     }
@@ -115,13 +109,12 @@ public class CustomerServiceController extends BaseController {
                                 @RequestParam(value = "nickname", required = true) String nickname,
                                 @RequestParam(value = "password", required = true) String password
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
         KfInfo account = new KfInfo();
         account.setKf_account(kf_account);
         account.setNickname(nickname);
         account.setPassword(password);
-        JSONObject resp = customerService.accountUpdate(at, account);
+        JSONObject resp = customerService.accountUpdate(account);
 
         return resp.toString();
     }

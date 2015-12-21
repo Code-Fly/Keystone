@@ -7,7 +7,6 @@ import com.fujitsu.base.controller.BaseController;
 import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.impl.CoreService;
 import com.fujitsu.keystone.publics.service.impl.OrderService;
 import net.sf.json.JSONObject;
@@ -41,9 +40,8 @@ public class OrderController extends BaseController {
                                @RequestParam(value = "beginTime", required = false, defaultValue = "0") String beginTime,
                                @RequestParam(value = "endTime", required = false, defaultValue = "0") String endTime
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = orderService.getOrderList(request, at, status, beginTime, endTime);
+        JSONObject resp = orderService.getOrderList(request, status, beginTime, endTime);
 
         return resp.toString();
     }
@@ -51,9 +49,8 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "/order/query/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String getOrder(HttpServletRequest request, HttpServletResponse response, @PathVariable String orderId) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = orderService.getOrder(request, at, orderId);
+        JSONObject resp = orderService.getOrder(request, orderId);
 
         return resp.toString();
     }

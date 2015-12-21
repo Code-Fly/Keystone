@@ -63,7 +63,7 @@ public class CoreController extends BaseController {
 
     @RequestMapping(value = "/token/refresh", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
-    public String refreshToken(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException, JMSException {
+    public String refreshToken(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException, JMSException, AccessTokenException {
 //
 //        greeterService.post("111111");
 //        greeterService.post("222");
@@ -87,7 +87,7 @@ public class CoreController extends BaseController {
 
     @RequestMapping(value = "/token/query", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
-    public String queryToken(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException {
+    public String queryToken(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException, AccessTokenException {
         return KeystoneUtil.getLocalAccessToken().toString();
     }
 

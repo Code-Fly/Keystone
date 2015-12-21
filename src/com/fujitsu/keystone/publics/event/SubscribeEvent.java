@@ -7,7 +7,6 @@ import com.fujitsu.base.constants.Const;
 import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.entity.push.response.TextMessage;
 import com.fujitsu.keystone.publics.service.impl.MessageService;
 import com.fujitsu.keystone.publics.service.impl.UserService;
@@ -32,10 +31,9 @@ public class SubscribeEvent extends Event {
         // 开发者微信号
         String toUserName = requestJson.getString(TO_USER_NAME);
 
-        String at = KeystoneUtil.getAccessToken();
         UserService userService = new UserService();
 
-        JSONObject user = userService.getWeChatUserInfo(at, fromUserName);
+        JSONObject user = userService.getWeChatUserInfo(fromUserName);
 
         TextMessage message = new TextMessage();
 

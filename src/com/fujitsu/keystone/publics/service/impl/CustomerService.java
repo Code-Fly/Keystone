@@ -4,6 +4,7 @@
 package com.fujitsu.keystone.publics.service.impl;
 
 import com.fujitsu.base.constants.Const;
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.WeChatClientUtil;
@@ -34,8 +35,8 @@ public class CustomerService extends BaseService implements ICustomerService {
     public static final String CUSTOMER_SERVICE_MESSAGE_TYPE_COUPON = "wxcard";
 
     @Override
-    public JSONObject getAccountList(String accessToken) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_LIST.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject getAccountList() throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_LIST;
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
@@ -43,8 +44,8 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject getAccountListOnline(String accessToken) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_LIST_ONLINE.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject getAccountListOnline() throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_LIST_ONLINE;
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
@@ -52,8 +53,8 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject accountAdd(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_ADD.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject accountAdd(KfInfo account) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_ADD;
 
         String response = WeChatClientUtil.post(url, JSONObject.fromObject(account).toString(), CharEncoding.UTF_8);
 
@@ -61,8 +62,8 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject accountDelete(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_DELETE.replace("ACCESS_TOKEN", accessToken).replace("KFACCOUNT", account.getKf_account());
+    public JSONObject accountDelete(KfInfo account) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_DELETE.replace("KFACCOUNT", account.getKf_account());
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
@@ -70,8 +71,8 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject accountUpdate(String accessToken, KfInfo account) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_UPDATE.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject accountUpdate(KfInfo account) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_KF_UPDATE;
 
         String response = WeChatClientUtil.post(url, JSONObject.fromObject(account).toString(), CharEncoding.UTF_8);
 
@@ -79,19 +80,19 @@ public class CustomerService extends BaseService implements ICustomerService {
     }
 
     @Override
-    public JSONObject sendTextMessage(String accessToken, TextMessage message) throws ConnectionFailedException, WeChatException {
-        JSONObject response = sendMessage(accessToken, JSONObject.fromObject(message));
+    public JSONObject sendTextMessage(TextMessage message) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        JSONObject response = sendMessage(JSONObject.fromObject(message));
         return response;
     }
 
     @Override
-    public JSONObject sendCouponMessage(String accessToken, CouponMessage message) throws ConnectionFailedException, WeChatException {
-        JSONObject response = sendMessage(accessToken, JSONObject.fromObject(message));
+    public JSONObject sendCouponMessage(CouponMessage message) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        JSONObject response = sendMessage(JSONObject.fromObject(message));
         return response;
     }
 
-    private JSONObject sendMessage(String accessToken, JSONObject message) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_MESSAGE_SEND.replace("ACCESS_TOKEN", accessToken);
+    private JSONObject sendMessage(JSONObject message) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_CUSTOMER_SERVICE_MESSAGE_SEND;
 
         String response = WeChatClientUtil.post(url, message.toString(), CharEncoding.UTF_8);
 

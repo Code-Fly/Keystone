@@ -53,7 +53,7 @@ public class UserController extends BaseController {
     public String getSNSUserInfo(HttpServletRequest request, HttpServletResponse response,
                                  @PathVariable String openId,
                                  @PathVariable String accessToken
-    ) throws ConnectionFailedException, WeChatException {
+    ) throws ConnectionFailedException, WeChatException, AccessTokenException {
 
         JSONObject resp = userService.getSNSUserInfo(accessToken, openId);
 
@@ -72,7 +72,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/user/sns/oauth", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
-    public String SNSUserOAuth(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException, OAuthException {
+    public String SNSUserOAuth(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException, OAuthException, AccessTokenException {
 
         // 用户同意授权后，能获取到code
         String code = request.getParameter("code");
@@ -92,7 +92,7 @@ public class UserController extends BaseController {
                 // 调用接口获取access_token
                 JSONObject at = coreService.getAccessToken(Const.WECHART_APP_ID, Const.WECHART_APP_SECRET);
 
-                JSONObject resp = userService.getWeChatUserInfo(request, at.getString("access_token"), openId);
+                JSONObject resp = userService.getWeChatUserInfo(request, openId);
 
                 logger.info(resp.toString());
                 return resp.toString();
@@ -118,10 +118,8 @@ public class UserController extends BaseController {
     public String getWeChatUserInfo(HttpServletRequest request, HttpServletResponse response,
                                     @PathVariable String openId
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        // 调用接口获取access_token
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = userService.getWeChatUserInfo(request, at, openId);
+        JSONObject resp = userService.getWeChatUserInfo(request, openId);
 
         return resp.toString();
 
@@ -143,12 +141,11 @@ public class UserController extends BaseController {
     public String getWeChatUserList(HttpServletRequest request, HttpServletResponse response,
                                     @RequestParam(value = "nextOpenId", required = false, defaultValue = "0") String nextOpenId
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
         if ("0".equals(nextOpenId))
             nextOpenId = null;
 
-        JSONObject resp = userService.getWeChatUserList(at, nextOpenId);
+        JSONObject resp = userService.getWeChatUserList(nextOpenId);
 
         return resp.toString();
     }
@@ -168,7 +165,7 @@ public class UserController extends BaseController {
     public String getWeChatUserGroupList(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = userService.getWeChatUserGroupList(at);
+        JSONObject resp = userService.getWeChatUserGroupList();
 
         return resp.toString();
     }
@@ -191,7 +188,7 @@ public class UserController extends BaseController {
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = userService.getWeChatUserGroupByOpenId(at, openId);
+        JSONObject resp = userService.getWeChatUserGroupByOpenId(openId);
 
         return resp.toString();
     }
@@ -214,7 +211,7 @@ public class UserController extends BaseController {
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = userService.renameWeChatUserGroup(at, groupId, name);
+        JSONObject resp = userService.renameWeChatUserGroup(groupId, name);
 
         return resp.toString();
     }
@@ -237,7 +234,7 @@ public class UserController extends BaseController {
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = userService.updateWeChatUserGroup(at, openId, toGroupId);
+        JSONObject resp = userService.updateWeChatUserGroup(openId, toGroupId);
 
         return resp.toString();
     }
@@ -260,7 +257,7 @@ public class UserController extends BaseController {
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = userService.batchUpdateWeChatUserGroup(at, JSONArray.fromObject(openIds), toGroupId);
+        JSONObject resp = userService.batchUpdateWeChatUserGroup(JSONArray.fromObject(openIds), toGroupId);
 
         return resp.toString();
     }
@@ -281,7 +278,7 @@ public class UserController extends BaseController {
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = userService.deleteWeChatUserGroup(at, groupId);
+        JSONObject resp = userService.deleteWeChatUserGroup(groupId);
 
         return resp.toString();
     }

@@ -8,7 +8,6 @@ import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.ConfigUtil;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.iface.ICoreService;
 import com.fujitsu.keystone.publics.service.iface.IMenuService;
 import net.sf.json.JSONObject;
@@ -49,13 +48,12 @@ public class MenuController extends BaseController {
     public String createDetault(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam(value = "data", required = false, defaultValue = "0") String data
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
         if ("0".equals(data)) {
             data = ConfigUtil.getJson("menu-default.json");
         }
 
-        JSONObject resp = JSONObject.fromObject(menuService.createDefault(at, JSONObject.fromObject(data)));
+        JSONObject resp = JSONObject.fromObject(menuService.createDefault(JSONObject.fromObject(data)));
         return resp.toString();
     }
 
@@ -75,13 +73,12 @@ public class MenuController extends BaseController {
     public String createCondition(HttpServletRequest request, HttpServletResponse response,
                                   @RequestParam(value = "data", required = false, defaultValue = "0") String data
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
         if ("0".equals(data)) {
             data = ConfigUtil.getJson("menu-condition.json");
         }
 
-        JSONObject resp = JSONObject.fromObject(menuService.createCondition(at, JSONObject.fromObject(data)));
+        JSONObject resp = JSONObject.fromObject(menuService.createCondition(JSONObject.fromObject(data)));
         return resp.toString();
     }
 
@@ -98,9 +95,8 @@ public class MenuController extends BaseController {
     @RequestMapping(value = "/menu/get", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String get(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = JSONObject.fromObject(menuService.get(at));
+        JSONObject resp = JSONObject.fromObject(menuService.get());
         return resp.toString();
     }
 
@@ -117,9 +113,8 @@ public class MenuController extends BaseController {
     @RequestMapping(value = "/menu/delete/default", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=" + CharEncoding.UTF_8)
     @ResponseBody
     public String deleteDetault(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = JSONObject.fromObject(menuService.deleteDefault(at));
+        JSONObject resp = JSONObject.fromObject(menuService.deleteDefault());
         return resp.toString();
     }
 
@@ -138,9 +133,8 @@ public class MenuController extends BaseController {
     public String deleteCondition(HttpServletRequest request, HttpServletResponse response,
                                   @RequestParam(value = "id", required = true) String id
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = JSONObject.fromObject(menuService.deleteCondition(at, id));
+        JSONObject resp = JSONObject.fromObject(menuService.deleteCondition(id));
         return resp.toString();
     }
 
@@ -160,9 +154,8 @@ public class MenuController extends BaseController {
     public String test(HttpServletRequest request, HttpServletResponse response,
                        @RequestParam(value = "userId", required = true) String userId
     ) throws ConnectionFailedException, AccessTokenException, WeChatException {
-        String at = KeystoneUtil.getAccessToken();
 
-        JSONObject resp = JSONObject.fromObject(menuService.test(at, userId));
+        JSONObject resp = JSONObject.fromObject(menuService.test(userId));
         return resp.toString();
     }
 }

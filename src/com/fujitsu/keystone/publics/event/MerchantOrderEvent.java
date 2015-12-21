@@ -7,7 +7,6 @@ import com.fujitsu.base.constants.Const;
 import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.base.helper.WeChatClientUtil;
 import com.fujitsu.keystone.publics.entity.customer.message.Text;
 import com.fujitsu.keystone.publics.entity.customer.message.TextMessage;
@@ -35,8 +34,6 @@ public class MerchantOrderEvent extends Event {
     public String execute(HttpServletRequest request, JSONObject requestJson) throws ConnectionFailedException, AccessTokenException, WeChatException, JMSException {
         super.execute(request, requestJson);
 
-        String at = KeystoneUtil.getAccessToken();
-
         String respXml = null;
 
         // 发送方帐号
@@ -56,7 +53,7 @@ public class MerchantOrderEvent extends Event {
         buffer.append("感谢您付款购买本店的服务！").append(Const.LINE_SEPARATOR);
         buffer.append(Const.LINE_SEPARATOR);
         buffer.append("服务名： ").append(Const.LINE_SEPARATOR);
-        Product p = (Product) JSONObject.toBean(new ProductService().getProduct(at, productId), Product.class);
+        Product p = (Product) JSONObject.toBean(new ProductService().getProduct(productId), Product.class);
         buffer.append(p.getProduct_info().getProduct_base().getName()).append(Const.LINE_SEPARATOR);
         buffer.append(Const.LINE_SEPARATOR);
         buffer.append("订单编号：").append(Const.LINE_SEPARATOR);
@@ -69,7 +66,7 @@ public class MerchantOrderEvent extends Event {
         t.setContent(buffer.toString());
         message.setText(t);
 
-        respXml = new CustomerService().sendTextMessage(at, message).toString();
+        respXml = new CustomerService().sendTextMessage(message).toString();
 
         String url = Const.getServerUrl(request) + "api/order/orderextend/add";
         JSONObject params = new JSONObject();

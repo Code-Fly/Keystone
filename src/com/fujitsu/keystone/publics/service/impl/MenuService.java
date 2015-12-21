@@ -4,6 +4,7 @@
 package com.fujitsu.keystone.publics.service.impl;
 
 import com.fujitsu.base.constants.Const;
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.WeChatClientUtil;
@@ -42,8 +43,8 @@ public class MenuService extends BaseService implements IMenuService {
 
 
     @Override
-    public JSONObject createDefault(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_MENU_CREATE_DEFAULT.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject createDefault(JSONObject json) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_MENU_CREATE_DEFAULT;
 
         String response = WeChatClientUtil.post(url, json.toString(), CharEncoding.UTF_8);
 
@@ -51,8 +52,8 @@ public class MenuService extends BaseService implements IMenuService {
     }
 
     @Override
-    public JSONObject createCondition(String accessToken, JSONObject json) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_MENU_CREATE_CONDITION.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject createCondition(JSONObject json) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_MENU_CREATE_CONDITION;
 
         String response = WeChatClientUtil.post(url, json.toString(), CharEncoding.UTF_8);
 
@@ -60,8 +61,8 @@ public class MenuService extends BaseService implements IMenuService {
     }
 
     @Override
-    public JSONObject get(String accessToken) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_MENU_GET.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject get() throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_MENU_GET;
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
@@ -69,8 +70,8 @@ public class MenuService extends BaseService implements IMenuService {
     }
 
     @Override
-    public JSONObject deleteDefault(String accessToken) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_MENU_DELETE_CONDITION.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject deleteDefault() throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_MENU_DELETE_CONDITION;
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
@@ -78,8 +79,8 @@ public class MenuService extends BaseService implements IMenuService {
     }
 
     @Override
-    public JSONObject deleteCondition(String accessToken, String id) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_MENU_DELETE_DEFAULT.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject deleteCondition(String id) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_MENU_DELETE_DEFAULT;
 
         JSONObject param = new JSONObject();
         param.put("menuid", id);
@@ -90,8 +91,8 @@ public class MenuService extends BaseService implements IMenuService {
     }
 
     @Override
-    public JSONObject test(String accessToken, String userId) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_MENU_TEST.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject test(String userId) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_MENU_TEST;
 
         JSONObject param = new JSONObject();
         param.put("user_id", userId);

@@ -3,6 +3,7 @@
  */
 package com.fujitsu.keystone.publics.service.iface;
 
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import net.sf.json.JSONObject;
@@ -20,7 +21,7 @@ public interface ICoreService {
 
     void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
-    JSONObject getAccessToken(String appid, String appsecret) throws ConnectionFailedException, WeChatException;
+    JSONObject getAccessToken(String appid, String appsecret) throws ConnectionFailedException, WeChatException, AccessTokenException;
 
-    JSONObject getJsapiTicket(String accessToken) throws ConnectionFailedException, WeChatException;
+    JSONObject getJsapiTicket(String accessToken) throws ConnectionFailedException, WeChatException, AccessTokenException;
 }

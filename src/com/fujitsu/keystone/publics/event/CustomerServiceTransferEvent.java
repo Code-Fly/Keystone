@@ -7,7 +7,6 @@ import com.fujitsu.base.constants.Const;
 import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.entity.customer.message.Text;
 import com.fujitsu.keystone.publics.entity.customer.message.TextMessage;
 import com.fujitsu.keystone.publics.entity.push.response.TransferCustomerServiceMessage;
@@ -27,8 +26,6 @@ public class CustomerServiceTransferEvent extends Event {
     @Override
     public String execute(HttpServletRequest request, JSONObject requestJson) throws ConnectionFailedException, AccessTokenException, WeChatException, JMSException {
         super.execute(request, requestJson);
-
-        String at = KeystoneUtil.getAccessToken();
 
         String respXml = null;
         // 发送方帐号
@@ -54,7 +51,7 @@ public class CustomerServiceTransferEvent extends Event {
         buffer.append("请稍后，我们的客服人员马上会接待您。").append(Const.LINE_SEPARATOR);
         t.setContent(buffer.toString());
         message.setText(t);
-        new CustomerService().sendTextMessage(at, message);
+        new CustomerService().sendTextMessage(message);
 
         return respXml;
     }

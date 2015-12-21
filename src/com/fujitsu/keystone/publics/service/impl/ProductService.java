@@ -4,6 +4,7 @@
 package com.fujitsu.keystone.publics.service.impl;
 
 import com.fujitsu.base.constants.Const;
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.FileUtil;
@@ -37,8 +38,8 @@ public class ProductService extends BaseService implements IProductService {
     /**
      * @throws ConnectionFailedException
      */
-    public JSONObject getProductList(String accessToken, int status) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_PRODUCT_GET_LIST.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject getProductList(int status) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_PRODUCT_GET_LIST;
 
         JSONObject request = new JSONObject();
         request.put("status", status);
@@ -48,8 +49,8 @@ public class ProductService extends BaseService implements IProductService {
         return JSONObject.fromObject(response);
     }
 
-    public JSONObject getProduct(String accessToken, String productId) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_PRODUCT_GET_DETAIL.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject getProduct(String productId) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_PRODUCT_GET_DETAIL;
 
         JSONObject request = new JSONObject();
         request.put("product_id", productId);
@@ -59,16 +60,16 @@ public class ProductService extends BaseService implements IProductService {
         return JSONObject.fromObject(response);
     }
 
-    public JSONObject getProductGroupList(String accessToken) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_PRODUCT_GROUP_GET_LIST.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject getProductGroupList() throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_PRODUCT_GROUP_GET_LIST;
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
         return JSONObject.fromObject(response);
     }
 
-    public JSONObject getProductGroupDetail(String accessToken, String groupId) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_PRODUCT_GROUP_GET_DETAIL.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject getProductGroupDetail(String groupId) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_PRODUCT_GROUP_GET_DETAIL;
 
         JSONObject request = new JSONObject();
         request.put("group_id", groupId);
@@ -80,15 +81,14 @@ public class ProductService extends BaseService implements IProductService {
 
     /**
      * @param request
-     * @param accessToken
      * @param productId
      * @return
      * @throws ConnectionFailedException
      */
-    public JSONObject getProduct(HttpServletRequest request, String accessToken, String productId) throws ConnectionFailedException, WeChatException {
-        JSONObject oList = orderService.getOrderList(accessToken, "0", "0", "0");
+    public JSONObject getProduct(HttpServletRequest request, String productId) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        JSONObject oList = orderService.getOrderList("0", "0", "0");
 
-        JSONObject respProduct = getProduct(accessToken, productId);
+        JSONObject respProduct = getProduct(productId);
         if (respProduct.containsKey("errcode") && !respProduct.getString("errcode").equals("0")) {
             logger.error(respProduct.toString());
             return respProduct;
@@ -108,17 +108,16 @@ public class ProductService extends BaseService implements IProductService {
 
     /**
      * @param request
-     * @param accessToken
      * @param status
      * @param filter
      * @return
      * @throws ConnectionFailedException
      */
-    public JSONObject getProductList(HttpServletRequest request, String accessToken, int status, Map<String, String> filter) throws ConnectionFailedException, WeChatException {
+    public JSONObject getProductList(HttpServletRequest request, int status, Map<String, String> filter) throws ConnectionFailedException, WeChatException, AccessTokenException {
         ProductList pList = new ProductList();
         String groupId = filter.get("groupId");
         if ("0".equals(groupId)) {
-            JSONObject resp = getProductList(accessToken, status);
+            JSONObject resp = getProductList(status);
             if (resp.containsKey("errcode") && !resp.getString("errcode").equals("0")) {
                 logger.error(resp.toString());
                 return resp;
@@ -129,7 +128,7 @@ public class ProductService extends BaseService implements IProductService {
             classMap.put("sku_list", SkuList.class);
             pList = (ProductList) JSONObject.toBean(resp, ProductList.class, classMap);
             List<ProductInfo> pInfos = pList.getProducts_info();
-            JSONObject oList = orderService.getOrderList(accessToken, "0", "0", "0");
+            JSONObject oList = orderService.getOrderList("0", "0", "0");
 
             for (int i = 0; i < pInfos.size(); i++) {
                 ProductInfo pInfo = pInfos.get(i);
@@ -144,17 +143,17 @@ public class ProductService extends BaseService implements IProductService {
             }
             pList.setProducts_info(pInfos);
         } else {
-            JSONObject respGroupDetail = getProductGroupDetail(accessToken, groupId);
+            JSONObject respGroupDetail = getProductGroupDetail(groupId);
             if (respGroupDetail.containsKey("errcode") && !respGroupDetail.getString("errcode").equals("0")) {
                 logger.error(respGroupDetail.toString());
                 return respGroupDetail;
             }
             List<String> pIds = respGroupDetail.getJSONObject("group_detail").getJSONArray("product_list");
             List<ProductInfo> pInfos = new ArrayList<ProductInfo>();
-            JSONObject oList = orderService.getOrderList(accessToken, "0", "0", "0");
+            JSONObject oList = orderService.getOrderList("0", "0", "0");
 
             for (int i = 0; i < pIds.size(); i++) {
-                JSONObject respProduct = getProduct(accessToken, pIds.get(i));
+                JSONObject respProduct = getProduct(pIds.get(i));
                 if (respProduct.containsKey("errcode") && !respProduct.getString("errcode").equals("0")) {
                     logger.error(respProduct.toString());
                     return respProduct;

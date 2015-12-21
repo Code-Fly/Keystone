@@ -4,6 +4,7 @@
 package com.fujitsu.keystone.publics.service.impl;
 
 import com.fujitsu.base.constants.Const;
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.FileUtil;
@@ -33,8 +34,8 @@ public class ShopService extends BaseService implements IShopService {
     /**
      * @throws ConnectionFailedException
      */
-    public JSONObject getShopList(String accessToken, String begin, String limit) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_SHOP_GET_LIST.replace("TOKEN", accessToken);
+    public JSONObject getShopList(String begin, String limit) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_SHOP_GET_LIST;
         JSONObject request = new JSONObject();
         request.put("begin", begin);
         request.put("limit", limit);
@@ -44,8 +45,8 @@ public class ShopService extends BaseService implements IShopService {
         return JSONObject.fromObject(response);
     }
 
-    public JSONObject getShopList(HttpServletRequest request, String accessToken, String begin, String limit) throws ConnectionFailedException, WeChatException {
-        JSONObject resp = getShopList(accessToken, begin, limit);
+    public JSONObject getShopList(HttpServletRequest request, String begin, String limit) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        JSONObject resp = getShopList(begin, limit);
         if (resp.containsKey("errcode") && !resp.getString("errcode").equals("0")) {
             logger.error(resp.toString());
             return resp;
@@ -77,8 +78,8 @@ public class ShopService extends BaseService implements IShopService {
     /**
      * @throws ConnectionFailedException
      */
-    public JSONObject getShop(String accessToken, String poi_id) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_SHOP_GET_DETAIL.replace("TOKEN", accessToken);
+    public JSONObject getShop(String poi_id) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_SHOP_GET_DETAIL;
 
         JSONObject request = new JSONObject();
         request.put("poi_id", poi_id);
@@ -88,8 +89,8 @@ public class ShopService extends BaseService implements IShopService {
         return JSONObject.fromObject(response);
     }
 
-    public JSONObject getShop(HttpServletRequest request, String accessToken, String poi_id) throws ConnectionFailedException, WeChatException {
-        JSONObject resp = getShop(accessToken, poi_id);
+    public JSONObject getShop(HttpServletRequest request, String poi_id) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        JSONObject resp = getShop(poi_id);
         if (resp.containsKey("errcode") && !resp.getString("errcode").equals("0")) {
             logger.error(resp.toString());
             return resp;

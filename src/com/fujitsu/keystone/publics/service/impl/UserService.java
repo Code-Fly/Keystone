@@ -4,6 +4,7 @@
 package com.fujitsu.keystone.publics.service.impl;
 
 import com.fujitsu.base.constants.Const;
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.FileUtil;
@@ -38,7 +39,7 @@ public class UserService extends BaseService implements IUserService {
      * @throws ConnectionFailedException
      */
     @Override
-    public JSONObject getOauth2AccessToken(String appId, String appSecret, String code) throws ConnectionFailedException, WeChatException {
+    public JSONObject getOauth2AccessToken(String appId, String appSecret, String code) throws ConnectionFailedException, WeChatException, AccessTokenException {
         String url = Const.PublicPlatform.URL_SNS_OAUTH2_TOKEN_GET.replace("APPID", appId).replace("SECRET", appSecret).replace("CODE", code);
         // 获取网页授权凭证
         String response = WeChatClientUtil.post(url, CharEncoding.UTF_8);
@@ -55,7 +56,7 @@ public class UserService extends BaseService implements IUserService {
      * @throws ConnectionFailedException
      */
     @Override
-    public JSONObject refreshOauth2AccessToken(String appId, String refreshToken) throws ConnectionFailedException, WeChatException {
+    public JSONObject refreshOauth2AccessToken(String appId, String refreshToken) throws ConnectionFailedException, WeChatException, AccessTokenException {
 
         String url = Const.PublicPlatform.URL_SNS_OAUTH2_TOKEN_REFRESH.replace("APPID", appId).replace("REFRESH_TOKEN", refreshToken);
         // 刷新网页授权凭证
@@ -67,16 +68,15 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 通过网页授权获取用户信息
      *
-     * @param accessToken 网页授权接口调用凭证
-     * @param openId      用户标识
+     * @param openId 用户标识
      * @return SNSUserInfo
      * @throws ConnectionFailedException
      */
     @Override
-    public JSONObject getSNSUserInfo(String accessToken, String openId) throws ConnectionFailedException, WeChatException {
+    public JSONObject getSNSUserInfo(String snsAccessToken, String openId) throws ConnectionFailedException, WeChatException, AccessTokenException {
         // SNSUserInfo snsUserInfo = null;
 
-        String url = Const.PublicPlatform.URL_USER_GET_SNS_INFO.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
+        String url = Const.PublicPlatform.URL_USER_GET_SNS_INFO.replace("SNS_ACCESS_TOKEN", snsAccessToken).replace("OPENID", openId);
         // 通过网页授权获取用户信息
         String response = WeChatClientUtil.post(url, CharEncoding.UTF_8);
 
@@ -86,16 +86,15 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 获取用户信息
      *
-     * @param accessToken 接口访问凭证
-     * @param openId      用户标识
+     * @param openId 用户标识
      * @return WeixinUserInfo
      * @throws ConnectionFailedException
      */
     @Override
-    public JSONObject getWeChatUserInfo(String accessToken, String openId) throws ConnectionFailedException, WeChatException {
+    public JSONObject getWeChatUserInfo(String openId) throws ConnectionFailedException, WeChatException, AccessTokenException {
         // WeChatUserInfo wechatUserInfo = null;
 
-        String url = Const.PublicPlatform.URL_USER_GET_INFO.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openId);
+        String url = Const.PublicPlatform.URL_USER_GET_INFO.replace("OPENID", openId);
         // 获取用户信息
         String response = WeChatClientUtil.post(url, CharEncoding.UTF_8);
 
@@ -106,16 +105,15 @@ public class UserService extends BaseService implements IUserService {
      * 获取用户信息
      *
      * @param request
-     * @param accessToken
      * @param openId
      * @return
      * @throws ConnectionFailedException
      * @throws WeChatException
      */
     @Override
-    public JSONObject getWeChatUserInfo(HttpServletRequest request, String accessToken, String openId) throws ConnectionFailedException, WeChatException {
+    public JSONObject getWeChatUserInfo(HttpServletRequest request, String openId) throws ConnectionFailedException, WeChatException, AccessTokenException {
 
-        JSONObject resp = getWeChatUserInfo(accessToken, openId);
+        JSONObject resp = getWeChatUserInfo(openId);
         if (resp.containsKey("errcode")) {
             logger.error(resp.toString());
             return resp;
@@ -129,18 +127,17 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 获取关注者列表
      *
-     * @param accessToken
      * @param nextOpenId
      * @return
      * @throws ConnectionFailedException
      */
     @Override
-    public JSONObject getWeChatUserList(String accessToken, String nextOpenId) throws ConnectionFailedException, WeChatException {
+    public JSONObject getWeChatUserList(String nextOpenId) throws ConnectionFailedException, WeChatException, AccessTokenException {
         // WeChatUserList wechatUserList = null;
         if (null == nextOpenId)
             nextOpenId = "";
 
-        String url = Const.PublicPlatform.URL_USER_GET_LIST.replace("ACCESS_TOKEN", accessToken).replace("NEXT_OPENID", nextOpenId);
+        String url = Const.PublicPlatform.URL_USER_GET_LIST.replace("NEXT_OPENID", nextOpenId);
 
         String response = WeChatClientUtil.post(url, CharEncoding.UTF_8);
 
@@ -150,15 +147,14 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 获取用户列表
      *
-     * @param accessToken
      * @return
      * @throws ConnectionFailedException
      * @throws WeChatException
      */
     @Override
-    public JSONObject getWeChatUserGroupList(String accessToken) throws ConnectionFailedException, WeChatException {
+    public JSONObject getWeChatUserGroupList() throws ConnectionFailedException, WeChatException, AccessTokenException {
 
-        String url = Const.PublicPlatform.URL_USER_GROUP_GET_LIST.replace("ACCESS_TOKEN", accessToken);
+        String url = Const.PublicPlatform.URL_USER_GROUP_GET_LIST;
 
         String response = WeChatClientUtil.get(url, CharEncoding.UTF_8);
 
@@ -168,16 +164,15 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 获取用户列表
      *
-     * @param accessToken
      * @param openId
      * @return
      * @throws ConnectionFailedException
      * @throws WeChatException
      */
     @Override
-    public JSONObject getWeChatUserGroupByOpenId(String accessToken, String openId) throws ConnectionFailedException, WeChatException {
+    public JSONObject getWeChatUserGroupByOpenId(String openId) throws ConnectionFailedException, WeChatException, AccessTokenException {
 
-        String url = Const.PublicPlatform.URL_USER_GROUP_GET_BY_OPENID.replace("ACCESS_TOKEN", accessToken);
+        String url = Const.PublicPlatform.URL_USER_GROUP_GET_BY_OPENID;
         JSONObject request = new JSONObject();
         request.put("openid", openId);
 
@@ -189,7 +184,6 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 修改分组名
      *
-     * @param accessToken
      * @param groupId
      * @param name
      * @return
@@ -197,8 +191,8 @@ public class UserService extends BaseService implements IUserService {
      * @throws WeChatException
      */
     @Override
-    public JSONObject renameWeChatUserGroup(String accessToken, String groupId, String name) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_USER_GROUP_RENAME.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject renameWeChatUserGroup(String groupId, String name) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_USER_GROUP_RENAME;
         JSONObject request = new JSONObject();
         JSONObject group = new JSONObject();
         group.put("id", groupId);
@@ -213,7 +207,6 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 移动用户分组
      *
-     * @param accessToken
      * @param openId
      * @param toGroupId
      * @return
@@ -221,8 +214,8 @@ public class UserService extends BaseService implements IUserService {
      * @throws WeChatException
      */
     @Override
-    public JSONObject updateWeChatUserGroup(String accessToken, String openId, String toGroupId) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_USER_GROUP_UPDATE.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject updateWeChatUserGroup(String openId, String toGroupId) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_USER_GROUP_UPDATE;
         JSONObject request = new JSONObject();
         request.put("openid", openId);
         request.put("to_groupid", toGroupId);
@@ -235,7 +228,6 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 批量移动用户分组
      *
-     * @param accessToken
      * @param openIds
      * @param toGroupId
      * @return
@@ -243,8 +235,8 @@ public class UserService extends BaseService implements IUserService {
      * @throws WeChatException
      */
     @Override
-    public JSONObject batchUpdateWeChatUserGroup(String accessToken, JSONArray openIds, String toGroupId) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_USER_GROUP_BATCH_UPDATE.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject batchUpdateWeChatUserGroup(JSONArray openIds, String toGroupId) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_USER_GROUP_BATCH_UPDATE;
         JSONObject request = new JSONObject();
         request.put("openid_list", openIds);
         request.put("to_groupid", toGroupId);
@@ -257,15 +249,14 @@ public class UserService extends BaseService implements IUserService {
     /**
      * 删除分组
      *
-     * @param accessToken
      * @param groupId
      * @return
      * @throws ConnectionFailedException
      * @throws WeChatException
      */
     @Override
-    public JSONObject deleteWeChatUserGroup(String accessToken, String groupId) throws ConnectionFailedException, WeChatException {
-        String url = Const.PublicPlatform.URL_USER_GROUP_DELETE.replace("ACCESS_TOKEN", accessToken);
+    public JSONObject deleteWeChatUserGroup(String groupId) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String url = Const.PublicPlatform.URL_USER_GROUP_DELETE;
         JSONObject request = new JSONObject();
         JSONObject group = new JSONObject();
         group.put("id", groupId);
