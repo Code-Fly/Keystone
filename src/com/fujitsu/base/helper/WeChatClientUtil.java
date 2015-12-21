@@ -69,7 +69,6 @@ public class WeChatClientUtil {
     public static String post(String url, String charset) throws ConnectionFailedException, WeChatException, AccessTokenException {
         String resp = null;
         for (int i = 0; i < (RETRY - 1); i++) {
-            System.out.println(i);
             resp = HttpClientUtil.post(url.replace("ACCESS_TOKEN", KeystoneUtil.getAccessToken()), charset);
             if (isValid(resp)) {
                 break;
