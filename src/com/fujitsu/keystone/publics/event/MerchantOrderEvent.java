@@ -16,6 +16,7 @@ import com.fujitsu.keystone.publics.service.impl.CustomerService;
 import com.fujitsu.keystone.publics.service.impl.ProductService;
 import net.sf.json.JSONObject;
 import org.apache.commons.codec.CharEncoding;
+import org.springframework.http.MediaType;
 
 import javax.jms.JMSException;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +76,7 @@ public class MerchantOrderEvent extends Event {
         params.put("buyerOpenid", fromUserName);
         params.put("productId", productId);
         params.put("orderId", orderId);
-        String resp = WeChatClientUtil.post(url, params.toString(), CharEncoding.UTF_8, "application/json");
+        String resp = WeChatClientUtil.post(url, params.toString(), CharEncoding.UTF_8, MediaType.APPLICATION_JSON_VALUE);
 
         if (null == resp) {
             throw new ConnectionFailedException();

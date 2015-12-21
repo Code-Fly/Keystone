@@ -11,6 +11,7 @@ import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.iface.ICoreService;
 import com.fujitsu.keystone.publics.service.iface.IMaterialService;
 import net.sf.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,7 @@ public class MaterialController extends BaseController {
      * @throws ConnectionFailedException
      * @throws AccessTokenException
      */
-    @RequestMapping(value = "/material/list/{type}/{offset}/{count}", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/material/list/{type}/{offset}/{count}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getMaterialList(HttpServletRequest request, HttpServletResponse response,
                                   @PathVariable String type,
@@ -61,7 +62,7 @@ public class MaterialController extends BaseController {
      * @throws ConnectionFailedException
      * @throws AccessTokenException
      */
-    @RequestMapping(value = "/material/query/{mediaId}", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/material/query/{mediaId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getMaterial(HttpServletRequest request, HttpServletResponse response,
                               @PathVariable String mediaId

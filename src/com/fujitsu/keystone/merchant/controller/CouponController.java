@@ -4,6 +4,7 @@ import com.fujitsu.base.constants.Const;
 import com.fujitsu.base.controller.BaseController;
 import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.merchant.service.iface.ICouponService;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class CouponController extends BaseController {
     @Resource
     ICouponService couponService;
 
-    @RequestMapping(value = "/merchant/coupon/send/{couponStockId}/{openId}", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/merchant/coupon/send/{couponStockId}/{openId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String sendCoupon(HttpServletRequest request, HttpServletResponse response, @PathVariable String couponStockId, @PathVariable String openId) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();

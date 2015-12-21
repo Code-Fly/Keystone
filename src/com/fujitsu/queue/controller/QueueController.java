@@ -6,6 +6,7 @@ import com.fujitsu.keystone.publics.event.Event;
 import com.fujitsu.queue.service.iface.IQueueService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class QueueController extends BaseController {
     @Resource
     IQueueService queueService;
 
-    @RequestMapping(value = "/queue/browse/{prefix}/{queue}", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/queue/browse/{prefix}/{queue}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String browse(HttpServletRequest request, HttpServletResponse response,
                          @PathVariable String queue,
@@ -59,7 +60,7 @@ public class QueueController extends BaseController {
         return JSONArray.fromObject(result).toString();
     }
 
-    @RequestMapping(value = "/queue/clear/{prefix}/{queue}", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/queue/clear/{prefix}/{queue}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String clear(HttpServletRequest request, HttpServletResponse response,
                         @PathVariable String queue,

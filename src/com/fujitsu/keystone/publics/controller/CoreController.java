@@ -13,6 +13,7 @@ import com.fujitsu.keystone.publics.service.iface.ICoreService;
 import com.fujitsu.keystone.publics.service.impl.GreeterService;
 import com.fujitsu.queue.service.impl.QueueService;
 import net.sf.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,7 +60,7 @@ public class CoreController extends BaseController {
 
     }
 
-    @RequestMapping(value = "/token/refresh", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/token/refresh", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String refreshToken(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException, JMSException {
 //
@@ -83,13 +84,13 @@ public class CoreController extends BaseController {
         return KeystoneUtil.refreshLocalAccessToken().toString();
     }
 
-    @RequestMapping(value = "/token/query", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/token/query", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String queryToken(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, WeChatException {
         return KeystoneUtil.getLocalAccessToken().toString();
     }
 
-    @RequestMapping(value = "/jsapi/ticket/query", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/jsapi/ticket/query", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String queryJsapiTicket(HttpServletRequest request, HttpServletResponse response) throws ConnectionFailedException, AccessTokenException, WeChatException {
         JSONObject resp = coreService.getJsapiTicket(KeystoneUtil.getAccessToken());

@@ -11,6 +11,7 @@ import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.impl.CoreService;
 import com.fujitsu.keystone.publics.service.impl.OrderService;
 import net.sf.json.JSONObject;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class OrderController extends BaseController {
     @Resource
     OrderService orderService;
 
-    @RequestMapping(value = "/order/list/{status}", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/order/list/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getOrderList(HttpServletRequest request, HttpServletResponse response,
                                @PathVariable String status,
@@ -46,7 +47,7 @@ public class OrderController extends BaseController {
         return resp.toString();
     }
 
-    @RequestMapping(value = "/order/query/{orderId}", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/order/query/{orderId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getOrder(HttpServletRequest request, HttpServletResponse response, @PathVariable String orderId) throws ConnectionFailedException, AccessTokenException, WeChatException {
         String at = KeystoneUtil.getAccessToken();
