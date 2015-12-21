@@ -86,6 +86,7 @@ public class Const {
         /**
          * public platform API
          */
+        public static final String URL_GET_CALLBACK_IP = ConfigUtil.getProperty(PUBLICS_CONF, "url.get.callbackip");
 
         public static final String URL_JSAPI_TICKET = ConfigUtil.getProperty(PUBLICS_CONF, "url.jsapi.ticket");
 

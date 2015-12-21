@@ -64,8 +64,8 @@ public class HttpClientUtil {
 
     }
 
-    public static String getFile(String url, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException {
-        return doGetFile(url, null, charset, httpServletResponse);
+    public static String forward(String url, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException {
+        return doForward(url, null, charset, httpServletResponse);
     }
 
 
@@ -215,7 +215,7 @@ public class HttpClientUtil {
         return respStr;
     }
 
-    protected static String doGetFile(String url, String param, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException {
+    protected static String doForward(String url, String param, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException {
         PoolingHttpClientConnectionManager connManager = null;
         CloseableHttpClient httpclient = null;
         CloseableHttpResponse response = null;

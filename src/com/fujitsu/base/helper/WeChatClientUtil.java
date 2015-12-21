@@ -1,11 +1,14 @@
 package com.fujitsu.base.helper;
 
+import com.fujitsu.base.constants.Const;
+import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -45,6 +48,18 @@ public class WeChatClientUtil {
             resp = HttpClientUtil.get(url, params, charset);
             if (isValid(resp)) {
                 break;
+            }
+        }
+        return resp;
+
+    }
+
+    public static String forward(String url, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException, WeChatException, AccessTokenException {
+        String resp = null;
+        for (int i = 0; i < (RETRY - 1); i++) {
+            resp = HttpClientUtil.get(Const.PublicPlatform.URL_GET_CALLBACK_IP.replace("ACCESS_TOKEN", KeystoneUtil.getAccessToken()), charset);
+            if (isValid(resp)) {
+                return HttpClientUtil.forward(url.replace("ACCESS_TOKEN", KeystoneUtil.getAccessToken()), charset, httpServletResponse);
             }
         }
         return resp;

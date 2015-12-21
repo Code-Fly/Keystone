@@ -4,7 +4,6 @@ import com.fujitsu.base.controller.BaseController;
 import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
-import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.keystone.publics.service.iface.IMediaService;
 import org.apache.commons.codec.CharEncoding;
 import org.springframework.http.MediaType;
@@ -31,12 +30,11 @@ public class MediaController extends BaseController {
     public String get(HttpServletRequest request, HttpServletResponse response,
                       @PathVariable String mediaId
     ) throws ConnectionFailedException, WeChatException, AccessTokenException {
-        String at = KeystoneUtil.getAccessToken();
 
         response.setCharacterEncoding(CharEncoding.UTF_8);
         response.setContentType(MediaType.MULTIPART_FORM_DATA_VALUE);
 
-        return mediaService.get(at, mediaId, response);
+        return mediaService.get(mediaId, response);
 
     }
 }
