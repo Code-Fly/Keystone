@@ -38,6 +38,8 @@ public class MessageService extends BaseService implements IMessageService {
     public static final String REQ_MESSAGE_TYPE_VOICE = "voice";
     // 请求消息类型：视频
     public static final String REQ_MESSAGE_TYPE_VIDEO = "video";
+    // 请求消息类型：短视频
+    public static final String REQ_MESSAGE_TYPE_SHORT_VIDEO = "shortvideo";
     // 请求消息类型：地理位置
     public static final String REQ_MESSAGE_TYPE_LOCATION = "location";
     // 请求消息类型：链接
