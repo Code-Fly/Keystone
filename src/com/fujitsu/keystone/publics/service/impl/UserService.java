@@ -8,6 +8,7 @@ import com.fujitsu.base.exception.AccessTokenException;
 import com.fujitsu.base.exception.ConnectionFailedException;
 import com.fujitsu.base.exception.WeChatException;
 import com.fujitsu.base.helper.FileUtil;
+import com.fujitsu.base.helper.HttpClientUtil;
 import com.fujitsu.base.helper.WeChatClientUtil;
 import com.fujitsu.base.service.BaseService;
 import com.fujitsu.keystone.publics.entity.account.WeChatUserInfo;
@@ -42,7 +43,7 @@ public class UserService extends BaseService implements IUserService {
     public JSONObject getOauth2AccessToken(String appId, String appSecret, String code) throws ConnectionFailedException, WeChatException, AccessTokenException {
         String url = Const.PublicPlatform.URL_SNS_OAUTH2_TOKEN_GET.replace("APPID", appId).replace("SECRET", appSecret).replace("CODE", code);
         // 获取网页授权凭证
-        String response = WeChatClientUtil.post(url, CharEncoding.UTF_8);
+        String response = HttpClientUtil.post(url, CharEncoding.UTF_8);
 
         return JSONObject.fromObject(response);
     }
@@ -60,7 +61,7 @@ public class UserService extends BaseService implements IUserService {
 
         String url = Const.PublicPlatform.URL_SNS_OAUTH2_TOKEN_REFRESH.replace("APPID", appId).replace("REFRESH_TOKEN", refreshToken);
         // 刷新网页授权凭证
-        String response = WeChatClientUtil.post(url, CharEncoding.UTF_8);
+        String response = HttpClientUtil.post(url, CharEncoding.UTF_8);
 
         return JSONObject.fromObject(response);
     }
@@ -78,7 +79,7 @@ public class UserService extends BaseService implements IUserService {
 
         String url = Const.PublicPlatform.URL_USER_GET_SNS_INFO.replace("SNS_ACCESS_TOKEN", snsAccessToken).replace("OPENID", openId);
         // 通过网页授权获取用户信息
-        String response = WeChatClientUtil.post(url, CharEncoding.UTF_8);
+        String response = HttpClientUtil.post(url, CharEncoding.UTF_8);
 
         return JSONObject.fromObject(response);
     }
