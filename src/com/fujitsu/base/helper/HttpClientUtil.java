@@ -29,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -44,14 +43,7 @@ public class HttpClientUtil {
     private static final Logger logger = LoggerFactory.getLogger(HttpClientUtil.class);
 
     public static String get(String url, String charset) throws ConnectionFailedException {
-        HttpEntity entity = doGet(url, null, charset);
-        String respStr;
-        try {
-            respStr = EntityUtils.toString(entity, charset).trim();
-        } catch (IOException e) {
-            throw new ConnectionFailedException();
-        }
-        return respStr;
+        return doGet(url, null, charset);
     }
 
     public static String get(String url, Map<String, String> params, String charset) throws ConnectionFailedException {
@@ -62,27 +54,13 @@ public class HttpClientUtil {
             valuePairs.add(nameValuePair);
         }
         String param = URLEncodedUtils.format(valuePairs, charset);
-        HttpEntity entity = doGet(url, param, charset);
 
-        String respStr;
-        try {
-            respStr = EntityUtils.toString(entity, charset).trim();
-        } catch (IOException e) {
-            throw new ConnectionFailedException();
-        }
-        return respStr;
+        return doGet(url, param, charset);
     }
 
     public static String get(String url, String params, String charset) throws ConnectionFailedException {
-        HttpEntity entity = doGet(url, params, charset);
 
-        String respStr;
-        try {
-            respStr = EntityUtils.toString(entity, charset).trim();
-        } catch (IOException e) {
-            throw new ConnectionFailedException();
-        }
-        return respStr;
+        return doGet(url, params, charset);
 
     }
 
@@ -197,12 +175,11 @@ public class HttpClientUtil {
 
     }
 
-    protected static HttpEntity doGet(String url, String param, String charset) throws ConnectionFailedException {
+    protected static String doGet(String url, String param, String charset) throws ConnectionFailedException {
         PoolingHttpClientConnectionManager connManager = null;
         CloseableHttpClient httpclient = null;
         CloseableHttpResponse response = null;
-        //String respStr = null;
-        HttpEntity entity;
+        String respStr = null;
         try {
             // 创建SSLContext对象，并使用我们指定的信任管理器初始化
             TrustManager[] tm = {new CustomX509TrustManager()};
@@ -227,15 +204,15 @@ public class HttpClientUtil {
 
             response = httpclient.execute(httpGet);
 
-            entity = response.getEntity();
-            //respStr = EntityUtils.toString(entity, charset).trim();
+            HttpEntity entity = response.getEntity();
+            respStr = EntityUtils.toString(entity, charset).trim();
             httpGet.abort();
             response.close();
             httpclient.close();
         } catch (Exception e) {
             throw new ConnectionFailedException(e);
         }
-        return entity;
+        return respStr;
     }
 
     protected static String doGetFile(String url, String param, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException {
