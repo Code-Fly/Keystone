@@ -51,6 +51,7 @@ public class ExceptionController extends BaseController {
         // retrieve some useful information from the request
         // String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
         // Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+        // String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
 
         Exception ex = (Exception) request.getAttribute("javax.servlet.error.exception");
 
