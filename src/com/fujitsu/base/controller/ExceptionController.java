@@ -49,10 +49,11 @@ public class ExceptionController extends BaseController {
     @ResponseBody
     public String uncaughtException(HttpServletRequest request) {
         // retrieve some useful information from the request
-        // Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
         // String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
+        // Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
 
         Exception ex = (Exception) request.getAttribute("javax.servlet.error.exception");
+
         logger.error("Uncaught exception", ex);
         ErrorMsg errMsg = new ErrorMsg(HttpStatus.INTERNAL_SERVER_ERROR.toString(), "Uncaught exception");
         return JSONObject.fromObject(errMsg).toString();
