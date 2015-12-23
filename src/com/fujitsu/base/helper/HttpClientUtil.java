@@ -64,11 +64,6 @@ public class HttpClientUtil {
 
     }
 
-    public static String forward(String url, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException {
-        return doForward(url, null, charset, httpServletResponse);
-    }
-
-
     public static String post(String url, String charset) throws ConnectionFailedException {
         return doPost(url, null, charset);
     }
@@ -132,6 +127,11 @@ public class HttpClientUtil {
         return doPost(url, stringEntity, charset);
 
     }
+
+    public static String forward(String url, String charset, HttpServletResponse httpServletResponse) throws ConnectionFailedException {
+        return doForward(url, null, charset, httpServletResponse);
+    }
+
 
     protected static String doPost(String url, StringEntity sEntity, String charset) throws ConnectionFailedException {
         PoolingHttpClientConnectionManager connManager = null;

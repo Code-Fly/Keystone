@@ -11,8 +11,6 @@ import com.fujitsu.base.helper.HttpClientUtil;
 import com.fujitsu.base.helper.KeystoneUtil;
 import com.fujitsu.base.service.BaseService;
 import com.fujitsu.keystone.publics.event.*;
-import com.fujitsu.keystone.publics.query.CompanyDetailQuery;
-import com.fujitsu.keystone.publics.query.CompanyListQuery;
 import com.fujitsu.keystone.publics.query.DefaultQuery;
 import com.fujitsu.keystone.publics.query.Query;
 import com.fujitsu.keystone.publics.service.iface.ICoreService;
@@ -27,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.regex.Pattern;
 
 /**
  * @author Barrie
@@ -182,26 +179,26 @@ public class CoreService extends BaseService implements ICoreService {
                 // 客服消息正则
                 String regCustomerService = "^" + Query.SEPARATOR + Query.CUSTOMER_SERVICE + "$";
 
-                // 查询企业列表
-                if (Pattern.compile(regCorpList).matcher(content).matches()) {
-                    Query query = new CompanyListQuery();
-                    respXml = query.execute(request, requestJson);
-                }
-                // 查询企业详情
-                else if (Pattern.compile(regCorpDetail).matcher(content).matches()) {
-                    Query query = new CompanyDetailQuery();
-                    respXml = query.execute(request, requestJson);
-                }
-                //客服消息
-                else if (Pattern.compile(regCustomerService).matcher(content).matches()) {
-                    Event event = new CustomerServiceTransferEvent();
-                    respXml = event.execute(request, requestJson);
-                }
-                //其它
-                else {
+//                // 查询企业列表
+//                if (Pattern.compile(regCorpList).matcher(content).matches()) {
+//                    Query query = new CompanyListQuery();
+//                    respXml = query.execute(request, requestJson);
+//                }
+//                // 查询企业详情
+//                else if (Pattern.compile(regCorpDetail).matcher(content).matches()) {
+//                    Query query = new CompanyDetailQuery();
+//                    respXml = query.execute(request, requestJson);
+//                }
+//                //客服消息
+//                else if (Pattern.compile(regCustomerService).matcher(content).matches()) {
+//                    Event event = new CustomerServiceTransferEvent();
+//                    respXml = event.execute(request, requestJson);
+//                }
+//                //其它
+//                else {
                     Query query = new DefaultQuery();
                     respXml = query.execute(request, requestJson);
-                }
+//                }
             }
             // 默认事件响应
             else {
