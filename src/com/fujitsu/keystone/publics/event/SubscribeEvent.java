@@ -47,6 +47,7 @@ public class SubscribeEvent extends Event {
         buffer.append("您好，欢迎关注");
         buffer.append(Const.WECHART_NAME);
         buffer.append(Const.LINE_SEPARATOR);
+        buffer.append("我们来聊天吧~").append(Const.LINE_SEPARATOR);
         message.setContent(buffer.toString());
 
         // 将消息对象转换成xml
