@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactManager">
     <artifact type="exploded-war" name="Keystone:war exploded">
-      <output-path>/Volumes/DATA/DEV/Java/apache-tomcat-7.0.63/webapps/Keystone</output-path>
+      <output-path>$PROJECT_DIR$/../../../apache-tomcat-7.0.63/webapps/ROOT</output-path>
       <root id="root">
         <element id="directory" name="WEB-INF">
           <element id="directory" name="classes">
@@ -17,7 +17,7 @@
     </artifact>
     <artifact type="war" name="Keystone:war">
       <output-path>$USER_HOME$/Desktop</output-path>
-      <root id="archive" name="Keystone_war.war">
+      <root id="archive" name="Keystone.war">
         <element id="artifact" artifact-name="Keystone:war exploded" />
       </root>
     </artifact>
