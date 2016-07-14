@@ -48,5 +48,28 @@
         </property>
     </bean>
 
+    <!-- 从请求和响应读取/编写字符串 -->
+    <bean id="stringHttpMessage" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 用于将对象转化为JSON -->
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="stringHttpMessage"/>
+                <ref bean="jsonConverter"/>
+            </list>
+
+        </property>
+
+    </bean>
+
     <mvc:resources mapping="/static/**" location="/WEB-INF/${wechat.cachepath}" cache-period="31556926"/>
 </beans>
