@@ -27,7 +27,7 @@ http://www.mydomain.com/api/keystone/menu/create/condition<br/>
 method: POST<br/>
 param: "data", required = false<br/>
 ##### Get menu
-http://www.mydomain.com/api/keystone/menu/get<br/>
+http://www.mydomain.com/api/keystone/menu/query<br/>
 method: GET<br/>
 ##### Delete default menu
 http://www.mydomain.com/api/keystone/menu/delete<br/>

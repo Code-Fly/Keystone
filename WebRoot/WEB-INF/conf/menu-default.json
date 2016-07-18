@@ -1,47 +1,82 @@
 {
   "button": [
     {
-      "type": "view",
-      "name": "我的药方",
-      "url": "https://www.baidu.com/"
-    },
-    {
-      "name": "健康档案",
+      "name": "品牌故事",
       "sub_button": [
         {
-          "type": "view",
-          "name": "我的档案",
-          "url": "https://www.baidu.com/"
+          "type": "view_limited",
+          "name": "OceanMind海睿思",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYdD-K83gXOUtfurgpD8YzsM"
+        },
+        {
+          "type": "view_limited",
+          "name": "团队介绍",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYYGhRAYannoOgFKXb_mzw0U"
+        },
+        {
+          "type": "view_limited",
+          "name": "渠道招募",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYVnxZlqZuDyNpE6MRyXo4FU"
+        },
+        {
+          "type": "view_limited",
+          "name": "联系我们",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYfFyDu-2q4H1yfKV8piwc_8"
         },
         {
           "type": "view",
-          "name": "家庭档案",
-          "url": "https://www.baidu.com/"
+          "name": "荣誉里程碑",
+          "url": "http://news.sina.cn/2016-04-19/detail-ifxriqri6836446.d.html?from=timeline&isappinstalled=0"
         }
       ]
     },
     {
-      "name": "个人中心",
+      "name": "产品介绍",
       "sub_button": [
         {
-          "type": "view",
-          "name": "我的资料",
-          "url": "https://www.baidu.com/"
+          "type": "view_limited",
+          "name": "Ocean Eye",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYfTU_Pl9k9ViHFBxmwst52g"
         },
         {
-          "type": "scancode_waitmsg",
-          "name": "关注医生",
-          "key": "SUBSCRIBE_DOC"
+          "type": "view_limited",
+          "name": "Ocean Mining",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYecw93342WeE2r1ULC7kRHw"
+        },
+        {
+          "type": "view_limited",
+          "name": "Ocean Analysis",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYWGvyInC3yopJvaSrKpXd10"
+        },
+        {
+          "type": "view_limited",
+          "name": "Ocean Storage",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYfnLXMCqtHMuiO9pAaQVyEg"
+        },
+        {
+          "type": "view_limited",
+          "name": "Ocean Source",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYe9Lsb7QDZ6WRK4lpa06r8Y"
+        }
+      ]
+    },
+    {
+      "name": "业界资讯",
+      "sub_button": [
+        {
+          "type": "view_limited",
+          "name": "行业动态",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYZc9_93iQ5o-CY7aq4xUFL4"
+        },
+        {
+          "type": "view_limited",
+          "name": "学术专题",
+          "media_id": "ZhIdNXvK_9kuGVgbp-VJYXjUpcgbdUTrCuapF4YjuoU"
         },
         {
           "type": "view",
-          "name": "我的医生",
-          "url": "https://www.baidu.com/"
-        },
-        {
-          "type": "view",
-          "name": "我的健康豆",
-          "url": "https://www.baidu.com/"
+          "name": "海睿思大事件",
+          "url": "http://x.eqxiu.com/s/KcQs3t5I?eqrcode=1&from=timeline&isappinstalled=0"
         }
       ]
     }

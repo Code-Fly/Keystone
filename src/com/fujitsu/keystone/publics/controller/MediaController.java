@@ -25,10 +25,10 @@ public class MediaController extends BaseController {
     @Resource
     IMediaService mediaService;
 
-    @RequestMapping(value = "/media/get/{mediaId}")
+    @RequestMapping(value = "/media/query/{mediaId}")
     @ResponseBody
-    public String get(HttpServletRequest request, HttpServletResponse response,
-                      @PathVariable String mediaId
+    public String query(HttpServletRequest request, HttpServletResponse response,
+                        @PathVariable String mediaId
     ) throws ConnectionFailedException, WeChatException, AccessTokenException {
 
         response.setCharacterEncoding(CharEncoding.UTF_8);

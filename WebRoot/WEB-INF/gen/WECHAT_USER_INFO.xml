@@ -1,0 +1,41 @@
+<?xml version="1.0"    encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC    "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 -->
+    <classPathEntry
+            location="D:\workspace\IntelliJ IDEA\self\WebContent\WEB-INF\lib\mysql-connector-java-5.1.20-bin.jar"/>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.duoku.groom.mybatis.plugin.PaginationPlugin"/>
+        <!-- 去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://120.76.112.32:3306/keystone?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true&amp;allowMultiQueries=true"
+                        userId="root" password="root">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- targetProject:自动生成代码的位置 -->
+        <javaModelGenerator targetPackage="com.fujitsu.database.entity" targetProject="Keystone">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.fujitsu.database.sqlmap" targetProject="Keystone">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fujitsu.database.mapper" targetProject="Keystone">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
+        <table tableName="WECHAT_USER_INFO" domainObjectName="WeChatUserInfo"/>
+
+    </context>
+</generatorConfiguration>
