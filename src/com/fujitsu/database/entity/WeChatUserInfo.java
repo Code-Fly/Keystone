@@ -117,6 +117,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.open_id
      *
      * @return the value of WECHAT_USER_INFO.open_id
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getOpenId() {
@@ -128,6 +129,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.open_id
      *
      * @param openId the value for WECHAT_USER_INFO.open_id
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setOpenId(String openId) {
@@ -139,6 +141,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.subscribe
      *
      * @return the value of WECHAT_USER_INFO.subscribe
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getSubscribe() {
@@ -150,6 +153,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.subscribe
      *
      * @param subscribe the value for WECHAT_USER_INFO.subscribe
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setSubscribe(String subscribe) {
@@ -161,6 +165,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.subscribe_time
      *
      * @return the value of WECHAT_USER_INFO.subscribe_time
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getSubscribeTime() {
@@ -172,6 +177,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.subscribe_time
      *
      * @param subscribeTime the value for WECHAT_USER_INFO.subscribe_time
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setSubscribeTime(String subscribeTime) {
@@ -183,6 +189,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.nickname
      *
      * @return the value of WECHAT_USER_INFO.nickname
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getNickname() {
@@ -194,6 +201,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.nickname
      *
      * @param nickname the value for WECHAT_USER_INFO.nickname
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setNickname(String nickname) {
@@ -205,6 +213,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.sex
      *
      * @return the value of WECHAT_USER_INFO.sex
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public Integer getSex() {
@@ -216,6 +225,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.sex
      *
      * @param sex the value for WECHAT_USER_INFO.sex
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setSex(Integer sex) {
@@ -227,6 +237,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.country
      *
      * @return the value of WECHAT_USER_INFO.country
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getCountry() {
@@ -238,6 +249,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.country
      *
      * @param country the value for WECHAT_USER_INFO.country
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setCountry(String country) {
@@ -249,6 +261,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.province
      *
      * @return the value of WECHAT_USER_INFO.province
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getProvince() {
@@ -260,6 +273,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.province
      *
      * @param province the value for WECHAT_USER_INFO.province
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setProvince(String province) {
@@ -271,6 +285,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.city
      *
      * @return the value of WECHAT_USER_INFO.city
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getCity() {
@@ -282,6 +297,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.city
      *
      * @param city the value for WECHAT_USER_INFO.city
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setCity(String city) {
@@ -293,6 +309,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.language
      *
      * @return the value of WECHAT_USER_INFO.language
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getLanguage() {
@@ -304,6 +321,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.language
      *
      * @param language the value for WECHAT_USER_INFO.language
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setLanguage(String language) {
@@ -315,6 +333,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.head_img_url
      *
      * @return the value of WECHAT_USER_INFO.head_img_url
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getHeadImgUrl() {
@@ -326,6 +345,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.head_img_url
      *
      * @param headImgUrl the value for WECHAT_USER_INFO.head_img_url
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setHeadImgUrl(String headImgUrl) {
@@ -337,6 +357,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.group_id
      *
      * @return the value of WECHAT_USER_INFO.group_id
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getGroupId() {
@@ -348,6 +369,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.group_id
      *
      * @param groupId the value for WECHAT_USER_INFO.group_id
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setGroupId(String groupId) {
@@ -359,6 +381,7 @@ public class WeChatUserInfo extends Page {
      * This method returns the value of the database column WECHAT_USER_INFO.remark
      *
      * @return the value of WECHAT_USER_INFO.remark
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public String getRemark() {
@@ -370,6 +393,7 @@ public class WeChatUserInfo extends Page {
      * This method sets the value of the database column WECHAT_USER_INFO.remark
      *
      * @param remark the value for WECHAT_USER_INFO.remark
+     *
      * @mbggenerated Thu Jul 14 19:38:58 CST 2016
      */
     public void setRemark(String remark) {
